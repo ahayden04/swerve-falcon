@@ -8,6 +8,7 @@
  */
 
 constexpr int PLACEHOLDER_INT = 0;
+constexpr double PLACEHOLDER_DOUBLE = 0.0;
 
 namespace controllerConstants {
 
@@ -21,15 +22,27 @@ namespace drivetrainConstants {
 
     //CAN IDs
     constexpr int motorDriveFrontRight = 0;
-    constexpr int motorDriveRearRight = 2;
-    constexpr int motorDriveFrontLeft = 4;
-    constexpr int motorDriveRearLeft = 6;
+    constexpr int motorDriveRearRight = 1;
+    constexpr int motorDriveFrontLeft = 2;
+    constexpr int motorDriveRearLeft = 3;
 
-    constexpr int motorTurnFrontRight = 1;
-    constexpr int motorTurnRearRight = 3;
-    constexpr int motorTurnFrontLeft = 5;
+    constexpr int motorTurnFrontRight = 4;
+    constexpr int motorTurnRearRight = 5;
+    constexpr int motorTurnFrontLeft = 6;
     constexpr int motorTurnRearLeft = 7;
 
+    constexpr int encoderTurnFrontRight = 8;
+    constexpr int encoderTurnRearRight = 9;
+    constexpr int encoderTurnFrontLeft = 10;
+    constexpr int encoderTurnRearLeft = 11;
+    
+
+    constexpr double wheelRadius = PLACEHOLDER_DOUBLE;
+    constexpr int driveEncoderResolution = 2048; //Falcon, possibly unnecessary, API might have it.
+    constexpr int steerEncoderResolution = 4096; //CANCoder; possibly unnecessary, just use degrees.
+
+    //constexpr auto moduleMaxAngularVelocity; Cannot figure out how to import WPI numbers.
+    //constexpr auto moduleMaxAngularAcceleration; Cannot figure out how to import WPI numbers.
 
     constexpr double motorMaxOutput = 0.5;
     constexpr double motorDeadband = 0.1;
