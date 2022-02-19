@@ -35,7 +35,19 @@ namespace drivetrainConstants {
     constexpr int encoderTurnRearRight = 9;
     constexpr int encoderTurnFrontLeft = 10;
     constexpr int encoderTurnRearLeft = 11;
-    
+
+    static constexpr int m_moduleFrontRight[3]{motorDriveFrontRight,
+                                               motorTurnFrontRight,
+                                               encoderTurnFrontRight};
+    static constexpr int m_moduleRearRight[3]{motorDriveRearRight,
+                                              motorTurnRearRight,
+                                              encoderTurnRearRight};
+    static constexpr int m_moduleFrontLeft[3]{motorDriveFrontLeft,
+                                              motorTurnFrontLeft,
+                                              encoderTurnFrontLeft};
+    static constexpr int m_moduleRearLeft[3]{motorDriveRearLeft,
+                                             motorTurnRearLeft,
+                                             encoderTurnRearLeft};
 
     constexpr double wheelRadius = PLACEHOLDER_DOUBLE;
     constexpr int driveEncoderResolution = 2048; //Falcon, possibly unnecessary, API might have it.
