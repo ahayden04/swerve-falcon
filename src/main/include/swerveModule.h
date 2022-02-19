@@ -7,15 +7,30 @@
 #include <units/velocity.h>
 #include <wpi/numbers>
 
+#include "Constants.h"
+using namespace drivetrainConstants;
+
 class swerveModule {
  public:
-  swerveModule(int motorDrive, int motorTurn, int encoderTurn);
+  swerveModule(int module[]);
 
   frc::SwerveModuleState GetState() const;
 
   void SetDesiredState(const frc::SwerveModuleState& state);
 
  private:
+  static constexpr int m_moduleFrontRight[3]{motorDriveFrontRight,
+                                           motorTurnFrontRight,
+                                           encoderTurnFrontRight};
+  static constexpr int m_moduleRearRight[3]{motorDriveRearRight,
+                                           motorTurnRearRight,
+                                           encoderTurnRearRight};
+  static constexpr int m_moduleFrontLeft[3]{motorDriveFrontLeft,
+                                           motorTurnFrontLeft,
+                                           encoderTurnFrontLeft};
+  static constexpr int m_moduleRearLeft[3]{motorDriveRearLeft,
+                                           motorTurnRearLeft,
+                                           encoderTurnRearLeft};
   WPI_CANCoder m_encoderTurn;
   WPI_TalonFX m_motorDrive;
   WPI_TalonFX m_motorTurn;

@@ -1,4 +1,4 @@
 #include "swerveModule.h"
 
-swerveModule::swerveModule(const int motorDrive, const int motorTurn, const int encoderTurn)
-    : m_motorDrive(motorDrive), m_motorTurn(motorTurn), m_encoderTurn(encoderTurn) {}
+swerveModule::swerveModule(int module[])
+    : m_motorDrive(module[1]), m_motorTurn(module[2]), m_encoderTurn(module[3]) {}
