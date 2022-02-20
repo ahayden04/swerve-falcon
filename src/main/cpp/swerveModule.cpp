@@ -1,6 +1,6 @@
 #include "swerveModule.h"
 
-#include <ctre/Phoenix.h>
+#include <ctre/phoenix/motorcontrol/can/WPI_TalonFX.h>
 #include <ctre/phoenix/sensors/WPI_CANCoder.h>
 
 swerveModule::swerveModule(const int module[])
@@ -13,14 +13,15 @@ void swerveModule::Config::BuildSettings(const ConfigType& type, int encoderID) 
         motorDriveConfig.supplyCurrLimit.enable = true;
     }
     if (type == ConfigType::motorTurn && encoderID != 0) {
-        motorTurnConfig.supplyCurrLimit.enable = true;
-        motorTurnConfig.remoteFilter0.remoteSensorDeviceID = encoderID;
-        motorTurnConfig.remoteFilter0.remoteSensorSource = RemoteSensorSource::RemoteSensorSource_CANCoder;
+        motorTurnSettings.supplyCurrLimit.enable = true;
+        motorTurnSettings.remoteFilter0.remoteSensorDeviceID = encoderID;
+        motorTurnSettings.remoteFilter0.remoteSensorSource = ctre::phoenix::motorcontrol::
+                                                             RemoteSensorSource::RemoteSensorSource_CANCoder;
     } else if (type == ConfigType::motorTurn && encoderID == 0) {
           throw std::invalid_argument("encoderID param missed in BuildSettings() call.");
       }
     if (type == ConfigType::encoderTurn) {
-        encoderTurnConfig.absoluteSensorRange = Unsigned_0_to_360;
+        encoderTurnSettings.absoluteSensorRange = ctre::phoenix::sensors::AbsoluteSensorRange::Unsigned_0_to_360;
     }
     else {
         printf("Invalid SwerveModule ConfigType.");

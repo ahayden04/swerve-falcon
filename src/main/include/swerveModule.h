@@ -1,6 +1,7 @@
 #pragma once
 
-#include <ctre/Phoenix.h>
+#include <ctre/phoenix/motorcontrol/can/WPI_TalonFX.h>
+#include <ctre/phoenix/sensors/WPI_CANCoder.h>
 #include <frc/kinematics/SwerveModuleState.h>
 #include <units/angular_velocity.h>
 #include <units/time.h>
@@ -19,9 +20,9 @@ class swerveModule {
      enum class ConfigType {motorDrive, motorTurn, encoderTurn};
      void BuildSettings(const ConfigType& type, int encoderID = 0);
     
-     TalonFXConfiguration motorDriveConfig;
-     TalonFXConfiguration motorTurnConfig;
-     CANCoderConfiguration encoderTurnConfig;
+    ctre::phoenix::motorcontrol::can::TalonFXConfiguration motorDriveConfig;
+    ctre::phoenix::motorcontrol::can::TalonFXConfiguration motorTurnConfig;
+    ctre::phoenix::sensors::CANCoderConfiguration encoderTurnConfig;
 
     private:
   };
@@ -35,7 +36,7 @@ class swerveModule {
  private:
   Config m_moduleConfig;
 
-  WPI_CANCoder m_encoderTurn;
-  WPI_TalonFX m_motorDrive;
-  WPI_TalonFX m_motorTurn;
+  ctre::phoenix::sensors::WPI_CANCoder m_encoderTurn;
+  ctre::phoenix::motorcontrol::can::WPI_TalonFX m_motorDrive;
+  ctre::phoenix::motorcontrol::can::WPI_TalonFX m_motorTurn;
 };
