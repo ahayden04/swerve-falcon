@@ -1,5 +1,9 @@
 #pragma once
 
+#include <units/angular_velocity.h>
+#include <units/time.h>
+#include <wpi/numbers>
+
 /**
  * This header contains hold robot-wide numerical or boolean constants ONLY.
  * 
@@ -55,8 +59,8 @@ namespace drivetrainConstants {
     constexpr int driveEncoderResolution = 2048; //Falcon, possibly unnecessary, API might have it.
     constexpr int steerEncoderResolution = 4096; //CANCoder; possibly unnecessary, just use degrees.
 
-    //constexpr auto moduleMaxAngularVelocity; Cannot figure out how to import WPI numbers.
-    //constexpr auto moduleMaxAngularAcceleration; Cannot figure out how to import WPI numbers.
+    constexpr auto moduleMaxAngularVelocity = wpi::numbers::pi * 1_rad_per_s;  // radians per second
+    constexpr auto moduleMaxAngularAcceleration = wpi::numbers::pi * 2_rad_per_s / 1_s;  // radians per second^2
 
     constexpr double motorMaxOutput = 0.5;
     constexpr double motorDeadband = 0.1;

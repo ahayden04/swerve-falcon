@@ -38,9 +38,4 @@ class swerveModule {
   WPI_CANCoder m_encoderTurn;
   WPI_TalonFX m_motorDrive;
   WPI_TalonFX m_motorTurn;
-
-  static constexpr auto moduleMaxAngularVelocity =
-      wpi::numbers::pi * 1_rad_per_s;  // radians per second
-  static constexpr auto moduleMaxAngularAcceleration =
-      wpi::numbers::pi * 2_rad_per_s / 1_s;  // radians per second^2
 };
