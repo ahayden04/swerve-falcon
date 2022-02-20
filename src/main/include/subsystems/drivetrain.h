@@ -2,6 +2,11 @@
 
 #include <frc2/command/SubsystemBase.h>
 
+#include "swerveModule.h"
+
+#include "Constants.h"
+using namespace swerveModules;
+
 class drivetrain : public frc2::SubsystemBase {
  public:
   drivetrain();
@@ -18,6 +23,11 @@ class drivetrain : public frc2::SubsystemBase {
   void SimulationPeriodic() override;
 
  private:
+  swerveModule m_frontRight{moduleFrontRight};
+  swerveModule m_rearRight{moduleRearRight};
+  swerveModule m_frontLeft{moduleFrontLeft};
+  swerveModule m_rearLeft{moduleRearLeft};
+
   // Components (e.g. motor controllers and sensors) should generally be
   // declared private and exposed only through public methods.
 };
