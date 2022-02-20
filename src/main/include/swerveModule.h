@@ -15,14 +15,14 @@ class swerveModule {
  public:
   swerveModule(const int module[]);
 
-  class Config {
+  class SetupTools {
     public:
      enum class ConfigType {motorDrive, motorTurn, encoderTurn};
      void BuildSettings(const ConfigType& type, int encoderID = 0);
     
-    ctre::phoenix::motorcontrol::can::TalonFXConfiguration motorDriveConfig;
-    ctre::phoenix::motorcontrol::can::TalonFXConfiguration motorTurnConfig;
-    ctre::phoenix::sensors::CANCoderConfiguration encoderTurnConfig;
+    ctre::phoenix::motorcontrol::can::TalonFXConfiguration motorDriveSettings;
+    ctre::phoenix::motorcontrol::can::TalonFXConfiguration motorTurnSettings;
+    ctre::phoenix::sensors::CANCoderConfiguration encoderTurnSettings;
 
     private:
   };
@@ -34,7 +34,7 @@ class swerveModule {
   void SetDesiredState(const frc::SwerveModuleState& state);
 
  private:
-  Config m_moduleConfig;
+  SetupTools m_setupTools;
 
   ctre::phoenix::sensors::WPI_CANCoder m_encoderTurn;
   ctre::phoenix::motorcontrol::can::WPI_TalonFX m_motorDrive;

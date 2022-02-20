@@ -8,9 +8,9 @@ swerveModule::swerveModule(const int module[])
     ConfigModule(module[3]);
 }
 
-void swerveModule::Config::BuildSettings(const ConfigType& type, int encoderID) {
+void swerveModule::SetupTools::BuildSettings(const ConfigType& type, int encoderID) {
     if (type == ConfigType::motorDrive) {
-        motorDriveConfig.supplyCurrLimit.enable = true;
+        motorDriveSettings.supplyCurrLimit.enable = true;
     }
     if (type == ConfigType::motorTurn && encoderID != 0) {
         motorTurnSettings.supplyCurrLimit.enable = true;
@@ -29,15 +29,15 @@ void swerveModule::Config::BuildSettings(const ConfigType& type, int encoderID) 
 }
 
 void swerveModule::ConfigModule(int encoderID)  {
-    m_moduleConfig.BuildSettings(Config::ConfigType::motorDrive);
-    m_moduleConfig.BuildSettings(Config::ConfigType::motorTurn, encoderID);
-    m_moduleConfig.BuildSettings(Config::ConfigType::encoderTurn);
+    m_setupTools.BuildSettings(SetupTools::ConfigType::motorDrive);
+    m_setupTools.BuildSettings(SetupTools::ConfigType::motorTurn, encoderID);
+    m_setupTools.BuildSettings(SetupTools::ConfigType::encoderTurn);
 
     m_motorDrive.ConfigFactoryDefault();
     m_motorTurn.ConfigFactoryDefault();
     m_encoderTurn.ConfigFactoryDefault();
 
-    m_motorDrive.ConfigAllSettings(m_moduleConfig.motorDriveConfig);
-    m_motorTurn.ConfigAllSettings(m_moduleConfig.motorTurnConfig);
-    m_encoderTurn.ConfigAllSettings(m_moduleConfig.encoderTurnConfig);
+    m_motorDrive.ConfigAllSettings(m_setupTools.motorDriveSettings);
+    m_motorTurn.ConfigAllSettings(m_setupTools.motorTurnSettings);
+    m_encoderTurn.ConfigAllSettings(m_setupTools.encoderTurnSettings);
 }
