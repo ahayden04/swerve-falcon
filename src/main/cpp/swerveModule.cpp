@@ -15,7 +15,7 @@ void swerveModule::Config::BuildSettings(const ConfigType& type) {
         motorTurnConfig.supplyCurrLimit.enable = true;
     }
     if (type == ConfigType::encoderTurn) {
-
+        encoderTurnConfig.absoluteSensorRange = Unsigned_0_to_360;
     }
     else {
         printf("Invalid SwerveModule ConfigType.");
