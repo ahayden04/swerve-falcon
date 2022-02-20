@@ -12,12 +12,12 @@ using namespace drivetrainConstants;
 
 class swerveModule {
  public:
-  swerveModule(int module[]);
+  swerveModule(const int module[]);
 
   class Config {
     public:
      enum class ConfigType {motorDrive, motorTurn, encoderTurn};
-     void BuildSettings(const ConfigType& type);
+     void BuildSettings(const ConfigType& type, int encoderID = 0);
     
      TalonFXConfiguration motorDriveConfig;
      TalonFXConfiguration motorTurnConfig;
@@ -26,7 +26,7 @@ class swerveModule {
     private:
   };
 
-  void ConfigModule();
+  void ConfigModule(int encoderID);
 
   frc::SwerveModuleState GetState() const;
 
