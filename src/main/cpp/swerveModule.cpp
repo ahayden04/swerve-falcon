@@ -32,6 +32,10 @@ void swerveModule::ConfigModule(int encoderID)  {
     m_moduleConfig.BuildSettings(Config::ConfigType::motorTurn, encoderID);
     m_moduleConfig.BuildSettings(Config::ConfigType::encoderTurn);
 
+    m_motorDrive.ConfigFactoryDefault();
+    m_motorTurn.ConfigFactoryDefault();
+    m_encoderTurn.ConfigFactoryDefault();
+
     m_motorDrive.ConfigAllSettings(m_moduleConfig.motorDriveConfig);
     m_motorTurn.ConfigAllSettings(m_moduleConfig.motorTurnConfig);
     m_encoderTurn.ConfigAllSettings(m_moduleConfig.encoderTurnConfig);
