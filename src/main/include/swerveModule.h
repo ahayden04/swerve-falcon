@@ -14,11 +14,27 @@ class swerveModule {
  public:
   swerveModule(int module[]);
 
+  class Config {
+    public:
+     enum class ConfigType {motorDrive, motorTurn, encoderTurn};
+     void BuildSettings(const ConfigType& type);
+    
+     TalonFXConfiguration motorDriveConfig;
+     TalonFXConfiguration motorTurnConfig;
+     CANCoderConfiguration encoderTurnConfig;
+
+    private:
+  };
+
+  void ConfigModule();
+
   frc::SwerveModuleState GetState() const;
 
   void SetDesiredState(const frc::SwerveModuleState& state);
 
  private:
+  Config m_moduleConfig;
+
   WPI_CANCoder m_encoderTurn;
   WPI_TalonFX m_motorDrive;
   WPI_TalonFX m_motorTurn;
