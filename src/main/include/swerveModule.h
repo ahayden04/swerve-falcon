@@ -19,18 +19,6 @@ class swerveModule {
   void SetDesiredState(const frc::SwerveModuleState& state);
 
  private:
-  static constexpr int m_moduleFrontRight[3]{motorDriveFrontRight,
-                                           motorTurnFrontRight,
-                                           encoderTurnFrontRight};
-  static constexpr int m_moduleRearRight[3]{motorDriveRearRight,
-                                           motorTurnRearRight,
-                                           encoderTurnRearRight};
-  static constexpr int m_moduleFrontLeft[3]{motorDriveFrontLeft,
-                                           motorTurnFrontLeft,
-                                           encoderTurnFrontLeft};
-  static constexpr int m_moduleRearLeft[3]{motorDriveRearLeft,
-                                           motorTurnRearLeft,
-                                           encoderTurnRearLeft};
   WPI_CANCoder m_encoderTurn;
   WPI_TalonFX m_motorDrive;
   WPI_TalonFX m_motorTurn;
