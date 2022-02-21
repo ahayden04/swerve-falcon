@@ -1,6 +1,8 @@
 #pragma once
 
+#include <AHRS.h>
 #include <frc2/command/SubsystemBase.h>
+
 
 #include "swerveModule.h"
 
@@ -23,6 +25,8 @@ class drivetrain : public frc2::SubsystemBase {
   void SimulationPeriodic() override;
 
  private:
+  AHRS m_navX{frc::SPI::kMXP};
+
   swerveModule m_frontRight{moduleFrontRight};
   swerveModule m_rearRight{moduleRearRight};
   swerveModule m_frontLeft{moduleFrontLeft};

@@ -1,6 +1,8 @@
 #include "subsystems/drivetrain.h"
 
-drivetrain::drivetrain() {}
+drivetrain::drivetrain() {
+    m_navX.ZeroYaw();
+}
 
 void drivetrain::Periodic() {}
 
