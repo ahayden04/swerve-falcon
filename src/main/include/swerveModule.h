@@ -18,7 +18,7 @@ class swerveModule {
   class SetupTools {
     public:
      enum class ConfigType {motorDrive, motorTurn, encoderTurn};
-     void BuildSettings(const ConfigType& type, int encoderID = 0);
+     void BuildSettings(const ConfigType& type, const int encoderID = 0);
     
     ctre::phoenix::motorcontrol::can::TalonFXConfiguration motorDriveSettings;
     ctre::phoenix::motorcontrol::can::TalonFXConfiguration motorTurnSettings;
@@ -27,7 +27,7 @@ class swerveModule {
     private:
   };
 
-  void ConfigModule(int encoderID);
+  void ConfigModule(const int encoderID);
 
   frc::SwerveModuleState GetState() const;
 
