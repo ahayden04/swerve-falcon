@@ -1,4 +1,5 @@
 #include "swerveModule.h"
+#include "hardwareSettings.h"
 
 #include <ctre/phoenix/motorcontrol/can/WPI_TalonFX.h>
 #include <ctre/phoenix/sensors/WPI_CANCoder.h>
@@ -10,43 +11,33 @@ swerveModule::swerveModule(const int module[])
     std::cout << module[0] << " - drive Falcon ID.\n";
     std::cout << module[1] << " - turn Falcon ID.\n";
     std::cout << module[2] << " - CANCoder for steering.\n\n";
-    ConfigModule(module[2]);
+    ConfigModule(ConfigType::motorDrive);
+    ConfigModule(ConfigType::motorTurn, module[2]);
+    ConfigModule(ConfigType::encoderTurn);
 }
 
-void swerveModule::SetupTools::BuildSettings(const ConfigType& type, int encoderID) {
-    if (type == ConfigType::motorDrive) {
-        motorDriveSettings.supplyCurrLimit.enable = true;
+void swerveModule::ConfigModule(const ConfigType& type, int encoderID) {
+    switch(type) {
+        case ConfigType::motorDrive :
+            m_motorDrive.ConfigFactoryDefault();
+            m_motorDrive.ConfigAllSettings(m_setupTools.hardwareSettings.motorDrive);
+            break;
+        case ConfigType::motorTurn :
+            if (encoderID != 0) {
+                m_motorTurn.ConfigFactoryDefault();
+                m_setupTools.motorTurnSettings.remoteFilter0.remoteSensorDeviceID = encoderID;
+                m_motorTurn.ConfigAllSettings(m_setupTools.hardwareSettings.motorTurn);
+            }
+            else {
+                throw std::invalid_argument("encoderID param invalid in ConfigModule() call.");
+            }
+            break;
+        case ConfigType::encoderTurn :
+            m_encoderTurn.ConfigFactoryDefault();
+            m_encoderTurn.ConfigAllSettings(m_setupTools.hardwareSettings.encoderTurn);
+            break;
+        default :
+            std::cout << encoderID;
+            throw std::invalid_argument(": Invalid swerveModule ConfigType");
     }
-    else if (type == ConfigType::motorTurn) {
-        if (encoderID != 0) {
-            motorTurnSettings.supplyCurrLimit.enable = true;
-            motorTurnSettings.remoteFilter0.remoteSensorDeviceID = encoderID;
-            motorTurnSettings.remoteFilter0.remoteSensorSource = ctre::phoenix::motorcontrol::
-                                                                 RemoteSensorSource::RemoteSensorSource_CANCoder;
-        }
-        else {
-            throw std::invalid_argument("encoderID param missed in BuildSettings() call.");
-        }
-    }
-    else if (type == ConfigType::encoderTurn) {
-        encoderTurnSettings.absoluteSensorRange = ctre::phoenix::sensors::AbsoluteSensorRange::Unsigned_0_to_360;
-    }
-    else {
-        std::cout << encoderID;
-        throw std::invalid_argument(": Invalid swerveModule ConfigType");
-    }
-}
-
-void swerveModule::ConfigModule(const int encoderID)  {
-    m_setupTools.BuildSettings(SetupTools::ConfigType::motorDrive, encoderID);
-    m_setupTools.BuildSettings(SetupTools::ConfigType::motorTurn, encoderID);
-    m_setupTools.BuildSettings(SetupTools::ConfigType::encoderTurn, encoderID);
-
-    m_motorDrive.ConfigFactoryDefault();
-    m_motorTurn.ConfigFactoryDefault();
-    m_encoderTurn.ConfigFactoryDefault();
-
-    m_motorDrive.ConfigAllSettings(m_setupTools.motorDriveSettings);
-    m_motorTurn.ConfigAllSettings(m_setupTools.motorTurnSettings);
-    m_encoderTurn.ConfigAllSettings(m_setupTools.encoderTurnSettings);
 }

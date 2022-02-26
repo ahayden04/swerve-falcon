@@ -9,6 +9,8 @@
 #include <wpi/numbers>
 
 #include "Constants.h"
+#include "hardwareSettings.h"
+
 using namespace drivetrainConstants;
 
 class swerveModule {
@@ -17,17 +19,14 @@ class swerveModule {
 
   class SetupTools {
     public:
-     enum class ConfigType {motorDrive, motorTurn, encoderTurn};
-     void BuildSettings(const ConfigType& type, const int encoderID = 0);
-    
-    ctre::phoenix::motorcontrol::can::TalonFXConfiguration motorDriveSettings;
-    ctre::phoenix::motorcontrol::can::TalonFXConfiguration motorTurnSettings;
-    ctre::phoenix::sensors::CANCoderConfiguration encoderTurnSettings;
-
+     hardwareSettings hardwareSettings;
+     ctre::phoenix::motorcontrol::can::TalonFXConfiguration motorTurnSettings;
+     ctre::phoenix::sensors::CANCoderConfiguration encoderTurnSettings;
     private:
   };
 
-  void ConfigModule(const int encoderID);
+  enum class ConfigType {motorDrive, motorTurn, encoderTurn};
+  void ConfigModule(const ConfigType& type, const int encoderID = 0);
 
   frc::SwerveModuleState GetState() const;
 
