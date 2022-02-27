@@ -5,9 +5,8 @@
 
 
 #include "swerveModule.h"
-
 #include "Constants.h"
-using namespace swerveModules;
+using namespace drivetrainConstants::swerveModules;
 
 class drivetrain : public frc2::SubsystemBase {
  public:

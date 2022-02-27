@@ -11,8 +11,6 @@
 #include "Constants.h"
 #include "hardwareSettings.h"
 
-using namespace drivetrainConstants;
-
 class swerveModule {
  public:
   swerveModule(const int module[]);
