@@ -1,8 +1,6 @@
 #include "swerveModule.h"
 #include "hardwareSettings.h"
 
-#include <ctre/phoenix/motorcontrol/can/WPI_TalonFX.h>
-#include <ctre/phoenix/sensors/WPI_CANCoder.h>
 #include <iostream>
 
 swerveModule::swerveModule(const int module[])
@@ -22,14 +20,15 @@ void swerveModule::ConfigModule(const ConfigType& type) {
             m_motorDrive.ConfigFactoryDefault();
             m_motorDrive.ConfigAllSettings(m_settings.motorDrive);
             //Bevel gear on left side.
-            m_motorDrive.SetInverted(TalonFXInvertType::Clockwise);
+            m_motorDrive.SetInverted(ctre::phoenix::motorcontrol::TalonFXInvertType::Clockwise);
             break;
         case ConfigType::motorTurn :
             m_motorTurn.ConfigFactoryDefault();
             m_motorTurn.ConfigRemoteFeedbackFilter(m_encoderTurn.GetDeviceNumber(),
+                                                   ctre::phoenix::motorcontrol::
                                                    RemoteSensorSource::RemoteSensorSource_CANCoder, 0, 0);
             m_motorTurn.ConfigAllSettings(m_settings.motorTurn);
-            m_motorTurn.SetInverted(TalonFXInvertType::CounterClockwise);
+            m_motorTurn.SetInverted(ctre::phoenix::motorcontrol::TalonFXInvertType::CounterClockwise);
             break;
         case ConfigType::encoderTurn :
             m_encoderTurn.ConfigFactoryDefault();
