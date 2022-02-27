@@ -24,7 +24,7 @@ class swerveModule {
   };
 
   enum class ConfigType {motorDrive, motorTurn, encoderTurn};
-  void ConfigModule(const ConfigType& type, const int encoderID = 0);
+  void ConfigModule(const ConfigType& type);
 
   frc::SwerveModuleState GetState() const;
 
