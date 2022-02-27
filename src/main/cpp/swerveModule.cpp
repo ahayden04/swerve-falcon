@@ -20,7 +20,7 @@ void swerveModule::ConfigModule(const ConfigType& type) {
     switch(type) {
         case ConfigType::motorDrive :
             m_motorDrive.ConfigFactoryDefault();
-            m_motorDrive.ConfigAllSettings(m_setupTools.settings.motorDrive);
+            m_motorDrive.ConfigAllSettings(m_settings.motorDrive);
             //Bevel gear on left side.
             m_motorDrive.SetInverted(TalonFXInvertType::Clockwise);
             break;
@@ -28,12 +28,12 @@ void swerveModule::ConfigModule(const ConfigType& type) {
             m_motorTurn.ConfigFactoryDefault();
             m_motorTurn.ConfigRemoteFeedbackFilter(m_encoderTurn.GetDeviceNumber(),
                                                    RemoteSensorSource::RemoteSensorSource_CANCoder, 0, 0);
-            m_motorTurn.ConfigAllSettings(m_setupTools.settings.motorTurn);
+            m_motorTurn.ConfigAllSettings(m_settings.motorTurn);
             m_motorTurn.SetInverted(TalonFXInvertType::CounterClockwise);
             break;
         case ConfigType::encoderTurn :
             m_encoderTurn.ConfigFactoryDefault();
-            m_encoderTurn.ConfigAllSettings(m_setupTools.settings.encoderTurn);
+            m_encoderTurn.ConfigAllSettings(m_settings.encoderTurn);
             break;
         default :
             throw std::invalid_argument("Invalid swerveModule ConfigType");
