@@ -21,12 +21,15 @@ void swerveModule::ConfigModule(const ConfigType& type, int encoderID) {
         case ConfigType::motorDrive :
             m_motorDrive.ConfigFactoryDefault();
             m_motorDrive.ConfigAllSettings(m_setupTools.hardwareSettings.motorDrive);
+            //Bevel gear on left side.
+            m_motorDrive.SetInverted(TalonFXInvertType::Clockwise);
             break;
         case ConfigType::motorTurn :
             if (encoderID != 0) {
                 m_motorTurn.ConfigFactoryDefault();
                 m_setupTools.motorTurnSettings.remoteFilter0.remoteSensorDeviceID = encoderID;
                 m_motorTurn.ConfigAllSettings(m_setupTools.hardwareSettings.motorTurn);
+                m_motorTurn.SetInverted(TalonFXInvertType::CounterClockwise);
             }
             else {
                 throw std::invalid_argument("encoderID param invalid in ConfigModule() call.");
