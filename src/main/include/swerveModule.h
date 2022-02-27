@@ -19,7 +19,7 @@ class swerveModule {
 
   class SetupTools {
     public:
-     hardwareSettings hardwareSettings;
+     hardwareSettings settings;
      ctre::phoenix::motorcontrol::can::TalonFXConfiguration motorTurnSettings;
      ctre::phoenix::sensors::CANCoderConfiguration encoderTurnSettings;
     private:

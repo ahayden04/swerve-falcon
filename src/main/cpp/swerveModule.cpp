@@ -20,7 +20,7 @@ void swerveModule::ConfigModule(const ConfigType& type, int encoderID) {
     switch(type) {
         case ConfigType::motorDrive :
             m_motorDrive.ConfigFactoryDefault();
-            m_motorDrive.ConfigAllSettings(m_setupTools.hardwareSettings.motorDrive);
+            m_motorDrive.ConfigAllSettings(m_setupTools.settings.motorDrive);
             //Bevel gear on left side.
             m_motorDrive.SetInverted(TalonFXInvertType::Clockwise);
             break;
@@ -28,7 +28,7 @@ void swerveModule::ConfigModule(const ConfigType& type, int encoderID) {
             if (encoderID != 0) {
                 m_motorTurn.ConfigFactoryDefault();
                 m_setupTools.motorTurnSettings.remoteFilter0.remoteSensorDeviceID = encoderID;
-                m_motorTurn.ConfigAllSettings(m_setupTools.hardwareSettings.motorTurn);
+                m_motorTurn.ConfigAllSettings(m_setupTools.settings.motorTurn);
                 m_motorTurn.SetInverted(TalonFXInvertType::CounterClockwise);
             }
             else {
@@ -37,7 +37,7 @@ void swerveModule::ConfigModule(const ConfigType& type, int encoderID) {
             break;
         case ConfigType::encoderTurn :
             m_encoderTurn.ConfigFactoryDefault();
-            m_encoderTurn.ConfigAllSettings(m_setupTools.hardwareSettings.encoderTurn);
+            m_encoderTurn.ConfigAllSettings(m_setupTools.settings.encoderTurn);
             break;
         default :
             std::cout << encoderID;

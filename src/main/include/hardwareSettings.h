@@ -1,5 +1,5 @@
-#ifndef SWERVEMODULECONFIGS_H
-#define SWERVEMODULECONFIGS_H
+#ifndef HARDWARESETTINGS_H
+#define HARDWARESETTINGS_H
 
 #include <ctre/Phoenix.h>
 
@@ -216,4 +216,4 @@ class hardwareSettings {
         motorTurn.initializationStrategy = ctre::phoenix::sensors::SensorInitializationStrategy::BootToAbsolutePosition;
     }
 };
-#endif SWERVEMODULECONFIGS_H
+#endif
