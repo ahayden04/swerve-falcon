@@ -23,6 +23,12 @@ void drivetrain::SwerveDrive(units::meters_per_second_t xSpeed,
     m_rearLeft.SetDesiredState(rearLeft);
 }
 
+void drivetrain::UpdateOdometry() {
+    m_odometry.Update(m_navX.GetRotation2d(), m_frontRight.GetState(),
+                      m_rearRight.GetState(), m_frontLeft.GetState(),
+                      m_rearLeft.GetState());
+}
+
 void drivetrain::Periodic() {}
 
 void drivetrain::SimulationPeriodic() {}
