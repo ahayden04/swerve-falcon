@@ -1,0 +1,25 @@
+General coding:
+- Create odometry object.
+- check order of events in switch statement.
+- Double-check CANCoder settings.
+- Do TalonFX Drive settings.
+- Do TalonFX Turn settings.
+- Set Falcon velocity from code.
+- Set Falcon angle target from code.
+- Tie joystick into Drive command (which uses SwerveDrive() from subsystem and maxVelocity).
+- Add max-module speed (in drivetrain.cpp).
+
+Administrative:
+- Put SwerveModule code in its own folder.
+- Get rid of std::cout and <iostream> per Adam.
+- Rename constants as kConstantNameHere.
+- Make sure all functions are capitalized.
+- Add comments everywhere.
+- Read style guide.
+- Optimize units?
+
+With physical robot:
+- Check if CANCoder needs to be inverted.
+- Tune PID for Drive.
+- Tune PID for Turn.
+- Get final module locations.
