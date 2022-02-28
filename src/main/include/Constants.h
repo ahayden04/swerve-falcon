@@ -1,6 +1,7 @@
 #pragma once
 
 #include <units/angular_velocity.h>
+#include <units/length.h>
 #include <units/time.h>
 #include <wpi/numbers>
 
@@ -41,28 +42,29 @@ namespace drivetrainConstants {
     constexpr int encoderTurnRearLeft = 11;
 
     namespace swerveModules {
-        const int moduleFrontRight[3]{motorDriveFrontRight,
+        constexpr int moduleFrontRight[3]{motorDriveFrontRight,
                                                    motorTurnFrontRight,
                                                    encoderTurnFrontRight};
-        const int moduleRearRight[3]{motorDriveRearRight,
+        constexpr int moduleRearRight[3]{motorDriveRearRight,
                                                   motorTurnRearRight,
                                                   encoderTurnRearRight};
-        const int moduleFrontLeft[3]{motorDriveFrontLeft,
+        constexpr int moduleFrontLeft[3]{motorDriveFrontLeft,
                                                   motorTurnFrontLeft,
                                                   encoderTurnFrontLeft};
-        const int moduleRearLeft[3]{motorDriveRearLeft,
+        constexpr int moduleRearLeft[3]{motorDriveRearLeft,
                                                  motorTurnRearLeft,
                                                  encoderTurnRearLeft};
     }
 
-    constexpr double wheelRadius = PLACEHOLDER_DOUBLE;
-    constexpr int driveEncoderResolution = 2048; //Falcon, possibly unnecessary, API might have it.
-    constexpr int steerEncoderResolution = 4096; //CANCoder; possibly unnecessary, just use degrees.
+    namespace calculations {
+        constexpr int driveEncoderResolution{2048}; //Falcon native units.
+        constexpr double finalDriveRatio{6.75};
+        constexpr units::length::inch_t wheelCircumference = {2 * wpi::numbers::pi * 3.8_in / 2};
 
-    constexpr auto moduleMaxAngularVelocity = wpi::numbers::pi * 1_rad_per_s;  // radians per second
-    constexpr auto moduleMaxAngularAcceleration = wpi::numbers::pi * 2_rad_per_s / 1_s;  // radians per second^2
+        constexpr auto moduleMaxAngularVelocity{wpi::numbers::pi * 1_rad_per_s};  // radians per second
+        constexpr auto moduleMaxAngularAcceleration{wpi::numbers::pi * 2_rad_per_s / 1_s};  // radians per second^2
 
-    constexpr double motorMaxOutput = 0.5;
-    constexpr double motorDeadband = 0.1;
-
+        constexpr double motorMaxOutput = 0.5;
+        constexpr double motorDeadband = 0.1;
+    }
 }
