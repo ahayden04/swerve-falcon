@@ -1,5 +1,7 @@
 General coding:
-- Create odometry object.
+- Create native-units unit-type, so that I can convert meters/sec to native-units/100ms.
+- Create swerveModule SDS-wheel travel, so that I can convert rotations to inches.
+- Use odometry object.
 - check order of events in switch statement.
 - Double-check CANCoder settings.
 - Do TalonFX Drive settings.
