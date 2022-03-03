@@ -58,7 +58,7 @@ namespace drivetrainConstants {
         constexpr auto finalDriveRatio{6.75 * 360_deg};
         constexpr units::length::inch_t wheelCircumference = {2 * wpi::numbers::pi * 3.8_in / 2};
 
-        constexpr auto kModuleMaxSpeed{0_mps};
+        constexpr auto kModuleMaxSpeed{16.3_fps};
         constexpr auto kChassisMaxSpeed{16.3_fps};
 
         constexpr auto moduleMaxAngularVelocity{wpi::numbers::pi * 1_rad_per_s};  // radians per second
