@@ -1,24 +1,26 @@
 General coding:
-- Create native-units unit-type, so that I can convert meters/sec to native-units/100ms.
 - Create swerveModule SDS-wheel travel, so that I can convert rotations to inches.
 - Use odometry object.
 - check order of events in switch statement.
 - Double-check CANCoder settings.
 - Do TalonFX Drive settings.
 - Do TalonFX Turn settings.
-- Set Falcon velocity from code.
-- Set Falcon angle target from code.
-- Tie joystick into Drive command (which uses SwerveDrive() from subsystem and maxVelocity).
-- Add max-module speed (in drivetrain.cpp).
+- Add more unit types?
+- Should there be a difference between kChassisMaxSpeed and kModuleMaxSpeed?
+- Double check inversion with controller.
+- Add code to zero CANcoder.
+- Something is wrong with the way I am passing the turn information. (99% sure)
 
 Administrative:
 - Put SwerveModule code in its own folder.
 - Get rid of std::cout and <iostream> per Adam.
+- Get rid of as many "using namespace" as possible.
 - Rename constants as kConstantNameHere.
 - Make sure all functions are capitalized.
 - Add comments everywhere.
 - Read style guide.
 - Optimize units?
+- -wreorder warning
 
 With physical robot:
 - Check if CANCoder needs to be inverted.
