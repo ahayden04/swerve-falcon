@@ -29,9 +29,6 @@ class hardwareSettings {
         motorDrive.primaryPID.selectedFeedbackCoefficient = 1.0;
         motorDrive.auxiliaryPID.selectedFeedbackSensor = ctre::phoenix::motorcontrol::FeedbackDevice::IntegratedSensor;
         motorDrive.auxiliaryPID.selectedFeedbackCoefficient = 1.0;
-        motorDrive.forwardLimitSwitchSource = ctre::phoenix::motorcontrol::LimitSwitchSource_Deactivated;
-        motorDrive.reverseLimitSwitchSource = ctre::phoenix::motorcontrol::LimitSwitchSource_Deactivated;
-
         motorDrive.sum0Term = ctre::phoenix::motorcontrol::FeedbackDevice::QuadEncoder;
         motorDrive.sum1Term = ctre::phoenix::motorcontrol::FeedbackDevice::RemoteSensor0;
         motorDrive.diff0Term = ctre::phoenix::motorcontrol::FeedbackDevice::RemoteSensor1;
@@ -92,10 +89,6 @@ class hardwareSettings {
         motorDrive.slot3.closedLoopPeakOutput = 0.129032;
         motorDrive.slot3.closedLoopPeriod = 12;
         motorDrive.auxPIDPolarity = true;
-        motorDrive.remoteFilter0.remoteSensorDeviceID = 22;
-        motorDrive.remoteFilter0.remoteSensorSource = ctre::phoenix::motorcontrol::RemoteSensorSource::RemoteSensorSource_GadgeteerPigeon_Roll;
-        motorDrive.remoteFilter1.remoteSensorDeviceID = 41;
-        motorDrive.remoteFilter1.remoteSensorSource = ctre::phoenix::motorcontrol::RemoteSensorSource::RemoteSensorSource_GadgeteerPigeon_Yaw;
         motorDrive.motionCruiseVelocity = 37;
         motorDrive.motionAcceleration = 3;
         motorDrive.motionProfileTrajectoryPeriod = 11;
@@ -124,8 +117,6 @@ class hardwareSettings {
         motorTurn.primaryPID.selectedFeedbackCoefficient = 0.328293;
         motorTurn.auxiliaryPID.selectedFeedbackSensor = ctre::phoenix::motorcontrol::FeedbackDevice::RemoteSensor0;
         motorTurn.auxiliaryPID.selectedFeedbackCoefficient = 0.877686;
-        motorTurn.forwardLimitSwitchSource = ctre::phoenix::motorcontrol::LimitSwitchSource_Deactivated;
-        motorTurn.reverseLimitSwitchSource = ctre::phoenix::motorcontrol::LimitSwitchSource_RemoteTalonSRX;
         motorTurn.sum0Term = ctre::phoenix::motorcontrol::FeedbackDevice::QuadEncoder;
         motorTurn.sum1Term = ctre::phoenix::motorcontrol::FeedbackDevice::RemoteSensor0;
         motorTurn.diff0Term = ctre::phoenix::motorcontrol::FeedbackDevice::RemoteSensor1;
@@ -141,14 +132,6 @@ class hardwareSettings {
         motorTurn.voltageMeasurementFilter = 16;
         motorTurn.velocityMeasurementPeriod = ctre::phoenix::sensors::SensorVelocityMeasPeriod::Period_25Ms;
         motorTurn.velocityMeasurementWindow = 8;
-        motorTurn.forwardLimitSwitchDeviceID = 6;
-        motorTurn.reverseLimitSwitchDeviceID = 4;
-        motorTurn.forwardLimitSwitchNormal = ctre::phoenix::motorcontrol::LimitSwitchNormal_NormallyClosed;
-        motorTurn.reverseLimitSwitchNormal = ctre::phoenix::motorcontrol::LimitSwitchNormal_Disabled;
-        motorTurn.forwardSoftLimitThreshold = 2767;
-        motorTurn.reverseSoftLimitThreshold = -1219;
-        motorTurn.forwardSoftLimitEnable = true;
-        motorTurn.reverseSoftLimitEnable = true;
         motorTurn.slot0.kP = 504.000000;
         motorTurn.slot0.kI = 5.600000;
         motorTurn.slot0.kD = 0.200000;
@@ -176,22 +159,7 @@ class hardwareSettings {
         motorTurn.slot2.maxIntegralAccumulator = 334.000000;
         motorTurn.slot2.closedLoopPeakOutput = 0.399804;
         motorTurn.slot2.closedLoopPeriod = 14;
-        motorTurn.slot3.kP = 34.000000;
-        motorTurn.slot3.kI = 32.000000;
-        motorTurn.slot3.kD = 436.000000;
-        motorTurn.slot3.kF = 0.343430;
-        motorTurn.slot3.integralZone = 2323;
-        motorTurn.slot3.allowableClosedloopError = 543;
-        motorTurn.slot3.maxIntegralAccumulator = 687.000000;
-        motorTurn.slot3.closedLoopPeakOutput = 0.129032;
-        motorTurn.slot3.closedLoopPeriod = 12;
         motorTurn.auxPIDPolarity = true;
-        motorTurn.remoteFilter0.remoteSensorDeviceID = 22;
-        motorTurn.remoteFilter0.remoteSensorSource = ctre::phoenix::motorcontrol::RemoteSensorSource::
-                                                     RemoteSensorSource_GadgeteerPigeon_Roll;
-        motorTurn.remoteFilter1.remoteSensorDeviceID = 41;
-        motorTurn.remoteFilter1.remoteSensorSource = ctre::phoenix::motorcontrol::RemoteSensorSource::
-                                                     RemoteSensorSource_GadgeteerPigeon_Yaw;
         motorTurn.motionCruiseVelocity = 37;
         motorTurn.motionAcceleration = 3;
         motorTurn.motionProfileTrajectoryPeriod = 11;
