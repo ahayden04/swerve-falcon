@@ -18,7 +18,9 @@ Drive::Drive(drivetrain* drivetrain,
 void Drive::Initialize() { printf("Drive initialized.\n"); }
 
 void Drive::Execute() {
-    //m_drivetrain->BootlegSwerve(m_xSpeed(), m_ySpeed(), m_zRotation());
+  m_drivetrain->SwerveDrive(-m_xSpeed()*calculations::kChassisMaxSpeed,
+                            -m_ySpeed()*calculations::kChassisMaxSpeed,
+                            -m_zRotation()*calculations::moduleMaxAngularVelocity, true);
 }
 
 void Drive::End(bool interrupted) { printf("**Drive has been interrupted!**\n"); }
