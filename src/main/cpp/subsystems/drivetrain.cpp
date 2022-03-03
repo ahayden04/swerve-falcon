@@ -13,7 +13,7 @@ void drivetrain::SwerveDrive(units::meters_per_second_t xSpeed,
                             xSpeed, ySpeed, zRot, m_navX.GetRotation2d())
                       : frc::ChassisSpeeds{xSpeed, ySpeed, zRot});
     //ADD FINAL MAX SPEED, TEMP 0_mps
-    m_kinematics.DesaturateWheelSpeeds(&moduleStates, 0_mps);
+    m_kinematics.DesaturateWheelSpeeds(&moduleStates, drivetrainConstants::calculations::kmoduleMaxSpeed);
 
     auto [frontRight, rearRight, frontLeft, rearLeft] = moduleStates;
 

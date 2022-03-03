@@ -12,9 +12,6 @@
  * header, which can then be included (where they are needed).
  */
 
-constexpr int PLACEHOLDER_INT = 0;
-constexpr double PLACEHOLDER_DOUBLE = 0.0;
-
 namespace controllerConstants {
 
     //USB port addresses on drivestation PC.
@@ -57,9 +54,10 @@ namespace drivetrainConstants {
     }
 
     namespace calculations {
-        constexpr int driveEncoderResolution{2048}; //Falcon native units.
-        constexpr double finalDriveRatio{6.75};
+        constexpr auto finalDriveRatio{6.75 * 360_deg};
         constexpr units::length::inch_t wheelCircumference = {2 * wpi::numbers::pi * 3.8_in / 2};
+
+        constexpr auto kmoduleMaxSpeed{0_mps};
 
         constexpr auto moduleMaxAngularVelocity{wpi::numbers::pi * 1_rad_per_s};  // radians per second
         constexpr auto moduleMaxAngularAcceleration{wpi::numbers::pi * 2_rad_per_s / 1_s};  // radians per second^2
