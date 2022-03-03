@@ -29,7 +29,7 @@ void swerveModule::ConfigModule(const ConfigType& type) {
             m_motorTurn.ConfigRemoteFeedbackFilter(m_encoderTurn.GetDeviceNumber(),
                                                    ctre::phoenix::motorcontrol::
                                                    RemoteSensorSource::RemoteSensorSource_CANCoder, 0, 0);
-            m_motorTurn.ConfigAllSettings(m_settings.motorTurn);
+            //m_motorTurn.ConfigAllSettings(m_settings.motorTurn);
             m_motorTurn.SetInverted(ctre::phoenix::motorcontrol::TalonFXInvertType::CounterClockwise);
             break;
         case ConfigType::encoderTurn :
@@ -50,6 +50,7 @@ frc::SwerveModuleState swerveModule::GetState() {
 void swerveModule::SetDesiredState(const frc::SwerveModuleState& referenceState) {
     const auto state = frc::SwerveModuleState::Optimize(
         referenceState,units::degree_t(m_encoderTurn.GetAbsolutePosition()));
+        std::cout << m_encoderTurn.GetAbsolutePosition() << "-abs_pos\n";
 
         const auto targetWheelSpeed{state.speed};
         const auto targetAngle{state.angle};
@@ -59,4 +60,9 @@ void swerveModule::SetDesiredState(const frc::SwerveModuleState& referenceState)
         m_motorDrive.Set(ctre::phoenix::motorcontrol::ControlMode::Velocity, targetMotorSpeed.value());
 
         m_motorTurn.Set(ctre::phoenix::motorcontrol::ControlMode::MotionMagic, targetAngle.Degrees().value());
+        if (state.angle.Degrees().value() == targetAngle.Degrees().value()) {
+            //std::cout << state.angle.Degrees().value();
+            std::cout << targetAngle.Degrees().value() << "-target_Deg\n";
+        } else {std::cout << "Fuck.";}
+
 }
