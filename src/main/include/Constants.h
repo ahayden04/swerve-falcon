@@ -3,6 +3,7 @@
 #include <units/angular_velocity.h>
 #include <units/length.h>
 #include <units/time.h>
+#include <units/velocity.h>
 #include <wpi/numbers>
 
 /**
@@ -57,7 +58,8 @@ namespace drivetrainConstants {
         constexpr auto finalDriveRatio{6.75 * 360_deg};
         constexpr units::length::inch_t wheelCircumference = {2 * wpi::numbers::pi * 3.8_in / 2};
 
-        constexpr auto kmoduleMaxSpeed{0_mps};
+        constexpr auto kModuleMaxSpeed{0_mps};
+        constexpr auto kChassisMaxSpeed{16.3_fps};
 
         constexpr auto moduleMaxAngularVelocity{wpi::numbers::pi * 1_rad_per_s};  // radians per second
         constexpr auto moduleMaxAngularAcceleration{wpi::numbers::pi * 2_rad_per_s / 1_s};  // radians per second^2
