@@ -50,7 +50,7 @@ frc::SwerveModuleState swerveModule::GetState() {
 void swerveModule::SetDesiredState(const frc::SwerveModuleState& referenceState) {
     const auto state = frc::SwerveModuleState::Optimize(
         referenceState,units::degree_t(m_encoderTurn.GetAbsolutePosition()));
-        std::cout << m_encoderTurn.GetAbsolutePosition() << "-abs_pos\n";
+        //std::cout << m_encoderTurn.GetAbsolutePosition() << "-abs_pos\n";
 
         const auto targetWheelSpeed{state.speed};
         const auto targetAngle{state.angle};
@@ -58,7 +58,9 @@ void swerveModule::SetDesiredState(const frc::SwerveModuleState& referenceState)
         units::native_units_per_decisecond_t targetMotorSpeed{
             (targetWheelSpeed * finalDriveRatio) / wheelCircumference};
         m_motorDrive.Set(ctre::phoenix::motorcontrol::ControlMode::Velocity, targetMotorSpeed.value());
+        std::cout << targetMotorSpeed.value() << "-SPEED\n";
 
+        //m_motorTurn.Set(ctre::phoenix::motorcontrol::ControlMode::MotionMagic, 45);
         m_motorTurn.Set(ctre::phoenix::motorcontrol::ControlMode::MotionMagic, targetAngle.Degrees().value());
         if (state.angle.Degrees().value() == targetAngle.Degrees().value()) {
             //std::cout << state.angle.Degrees().value();
