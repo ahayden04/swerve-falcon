@@ -18,8 +18,8 @@ Drive::Drive(drivetrain* drivetrain,
 void Drive::Initialize() { printf("Drive initialized.\n"); }
 
 void Drive::Execute() {
-  m_drivetrain->SwerveDrive(-m_xSpeed()*calculations::kChassisMaxSpeed,
-                            -m_ySpeed()*calculations::kChassisMaxSpeed,
+  m_drivetrain->SwerveDrive(-m_ySpeed()*calculations::kChassisMaxSpeed,
+                            -m_xSpeed()*calculations::kChassisMaxSpeed,
                             -m_zRotation()*calculations::moduleMaxAngularVelocity, true);
 }
 
