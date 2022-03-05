@@ -1,8 +1,5 @@
 #include "swerveModule.h"
-#include "hardwareSettings.h"
-
 #include <iostream>
-using namespace drivetrainConstants::calculations;
 
 swerveModule::swerveModule(const int module[])
     : m_motorDrive(module[0]), m_motorTurn(module[1]), m_encoderTurn(module[2]) {
@@ -42,7 +39,9 @@ void swerveModule::ConfigModule(const ConfigType& type) {
 
 frc::SwerveModuleState swerveModule::GetState() {
     units::native_units_per_decisecond_t motorSpeed{m_motorDrive.GetSelectedSensorVelocity(0)};
-    units::meters_per_second_t wheelSpeed{(motorSpeed * wheelCircumference) / finalDriveRatio};
+    units::meters_per_second_t wheelSpeed{
+        (motorSpeed * drivetrainConstants::calculations::kWheelCircumference)
+        / drivetrainConstants::calculations::kFinalDriveRatio};
     return {wheelSpeed,frc::Rotation2d(units::degree_t(m_encoderTurn.GetAbsolutePosition()))};
 }
 
@@ -54,7 +53,8 @@ void swerveModule::SetDesiredState(const frc::SwerveModuleState& referenceState)
         const auto targetAngle{state.angle.Degrees().value()};
 
         units::native_units_per_decisecond_t targetMotorSpeed{
-            (targetWheelSpeed * finalDriveRatio) / wheelCircumference};
+            (targetWheelSpeed * drivetrainConstants::calculations::kFinalDriveRatio)
+            / drivetrainConstants::calculations::kWheelCircumference};
         m_motorDrive.Set(ctre::phoenix::motorcontrol::ControlMode::Velocity, targetMotorSpeed.value());
         std::cout << targetMotorSpeed.value() << "-SPEED\n";
 

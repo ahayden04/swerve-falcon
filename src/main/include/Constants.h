@@ -14,57 +14,54 @@
  */
 
 namespace controllerConstants {
-
     //USB port addresses on drivestation PC.
-    constexpr int controllerMain = 0;
-    constexpr int controllerAux = 1;
-
+    constexpr int kControllerMainID = 0;
+    constexpr int kControllerAuxID = 1;
 }
 
 namespace drivetrainConstants {
-
     //CAN IDs
-    constexpr int motorDriveFrontRight = 0;
-    constexpr int motorDriveRearRight = 1;
-    constexpr int motorDriveFrontLeft = 2;
-    constexpr int motorDriveRearLeft = 3;
+    constexpr int kMotorDriveFrontRightID = 0;
+    constexpr int kMotorDriveRearRightID = 1;
+    constexpr int kMotorDriveFrontLeftID = 2;
+    constexpr int kMotorDriveRearLeftID = 3;
 
-    constexpr int motorTurnFrontRight = 4;
-    constexpr int motorTurnRearRight = 5;
-    constexpr int motorTurnFrontLeft = 6;
-    constexpr int motorTurnRearLeft = 7;
+    constexpr int kMotorTurnFrontRightID = 4;
+    constexpr int kMotorTurnRearRightID = 5;
+    constexpr int kMotorTurnFrontLeftID = 6;
+    constexpr int kMotorTurnRearLeftID = 7;
 
-    constexpr int encoderTurnFrontRight = 8;
-    constexpr int encoderTurnRearRight = 9;
-    constexpr int encoderTurnFrontLeft = 10;
-    constexpr int encoderTurnRearLeft = 11;
+    constexpr int kEncoderTurnFrontRightID = 8;
+    constexpr int kEncoderTurnRearRightID = 9;
+    constexpr int kEncoderTurnFrontLeftID = 10;
+    constexpr int kEncoderTurnRearLeftID = 11;
 
     namespace swerveModules {
-        constexpr int moduleFrontRight[3]{motorDriveFrontRight,
-                                                   motorTurnFrontRight,
-                                                   encoderTurnFrontRight};
-        constexpr int moduleRearRight[3]{motorDriveRearRight,
-                                                  motorTurnRearRight,
-                                                  encoderTurnRearRight};
-        constexpr int moduleFrontLeft[3]{motorDriveFrontLeft,
-                                                  motorTurnFrontLeft,
-                                                  encoderTurnFrontLeft};
-        constexpr int moduleRearLeft[3]{motorDriveRearLeft,
-                                                 motorTurnRearLeft,
-                                                 encoderTurnRearLeft};
+        constexpr int kModuleFrontRight[3]{kMotorDriveFrontRightID,
+                                                   kMotorTurnFrontRightID,
+                                                   kEncoderTurnFrontRightID};
+        constexpr int kModuleRearRight[3]{kMotorDriveRearRightID,
+                                                  kMotorTurnRearRightID,
+                                                  kEncoderTurnRearRightID};
+        constexpr int kModuleFrontLeft[3]{kMotorDriveFrontLeftID,
+                                                  kMotorTurnFrontLeftID,
+                                                  kEncoderTurnFrontLeftID};
+        constexpr int kModuleRearLeft[3]{kMotorDriveRearLeftID,
+                                                 kMotorTurnRearLeftID,
+                                                 kEncoderTurnRearLeftID};
     }
 
     namespace calculations {
-        constexpr auto finalDriveRatio{6.75 * 360_deg};
-        constexpr units::length::inch_t wheelCircumference = {2 * wpi::numbers::pi * 3.8_in / 2};
+        constexpr auto kFinalDriveRatio{6.75 * 360_deg};
+        constexpr units::length::inch_t kWheelCircumference = {2 * wpi::numbers::pi * 3.8_in / 2};
 
         constexpr auto kModuleMaxSpeed{16.3_fps};
         constexpr auto kChassisMaxSpeed{16.3_fps};
 
-        constexpr auto moduleMaxAngularVelocity{wpi::numbers::pi * 1_rad_per_s};  // radians per second
-        constexpr auto moduleMaxAngularAcceleration{wpi::numbers::pi * 2_rad_per_s / 1_s};  // radians per second^2
+        constexpr auto kModuleMaxAngularVelocity{wpi::numbers::pi * 1_rad_per_s};  // radians per second
+        constexpr auto kModuleMaxAngularAcceleration{wpi::numbers::pi * 2_rad_per_s / 1_s};  // radians per second^2
 
-        constexpr double motorMaxOutput = 0.5;
-        constexpr double motorDeadband = 0.1;
+        constexpr double kMotorMaxOutput = 0.5;
+        constexpr double kMotorDeadband = 0.1;
     }
 }

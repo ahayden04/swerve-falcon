@@ -10,8 +10,6 @@
 #include "swerveModule.h"
 #include "Constants.h"
 
-using namespace drivetrainConstants::swerveModules;
-
 class drivetrain : public frc2::SubsystemBase {
  public:
   drivetrain();
@@ -42,10 +40,10 @@ class drivetrain : public frc2::SubsystemBase {
   frc::Translation2d m_locationFrontLeft{+30_in, +30_in};
   frc::Translation2d m_locationRearLeft{-30_in, +30_in};
 
-  swerveModule m_frontRight{moduleFrontRight};
-  swerveModule m_rearRight{moduleRearRight};
-  swerveModule m_frontLeft{moduleFrontLeft};
-  swerveModule m_rearLeft{moduleRearLeft};
+  swerveModule m_frontRight{drivetrainConstants::swerveModules::kModuleFrontRight};
+  swerveModule m_rearRight{drivetrainConstants::swerveModules::kModuleRearRight};
+  swerveModule m_frontLeft{drivetrainConstants::swerveModules::kModuleFrontLeft};
+  swerveModule m_rearLeft{drivetrainConstants::swerveModules::kModuleRearLeft};
 
   AHRS m_navX{frc::SPI::kMXP};
 

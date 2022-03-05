@@ -4,17 +4,15 @@
 
 #pragma once
 
-#include <frc2/command/Command.h>
+#include <frc2/command/Command.h> //ask about these.
 
-#include "Constants.h"
+#include "Constants.h" //ask about these.
 
 #include "commands/Auto.h"
 #include "commands/Drive.h"
 #include "subsystems/drivetrain.h"
 
 #include <frc/Joystick.h>
-
-using namespace controllerConstants;
 
 /**
  * This class is where the bulk of the robot should be declared.  Since
@@ -37,5 +35,5 @@ class RobotContainer {
 
   void ConfigureButtonBindings();
 
-  frc::Joystick m_controllerMain{controllerMain};
+  frc::Joystick m_controllerMain{controllerConstants::kControllerMainID};
 };

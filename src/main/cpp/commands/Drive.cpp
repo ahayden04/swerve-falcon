@@ -1,7 +1,4 @@
 #include "commands/Drive.h"
-#include "Constants.h"
-
-using namespace drivetrainConstants;
 
 Drive::Drive(drivetrain* drivetrain,
              std::function<double()> xSpeed,
@@ -18,9 +15,9 @@ Drive::Drive(drivetrain* drivetrain,
 void Drive::Initialize() { printf("Drive initialized.\n"); }
 
 void Drive::Execute() {
-  m_drivetrain->SwerveDrive(-m_ySpeed()*calculations::kChassisMaxSpeed,
-                            -m_xSpeed()*calculations::kChassisMaxSpeed,
-                            -m_zRotation()*calculations::moduleMaxAngularVelocity, true);
+  m_drivetrain->SwerveDrive(-m_ySpeed()*drivetrainConstants::calculations::kChassisMaxSpeed,
+                            -m_xSpeed()*drivetrainConstants::calculations::kChassisMaxSpeed,
+                            -m_zRotation()*drivetrainConstants::calculations::kModuleMaxAngularVelocity, true);
 }
 
 void Drive::End(bool interrupted) { printf("**Drive has been interrupted!**\n"); }
