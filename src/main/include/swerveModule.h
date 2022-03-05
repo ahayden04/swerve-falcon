@@ -23,9 +23,9 @@ class swerveModule {
   void SetDesiredState(const frc::SwerveModuleState& state);
 
  private:
-  ctre::phoenix::sensors::WPI_CANCoder m_encoderTurn;
   ctre::phoenix::motorcontrol::can::WPI_TalonFX m_motorDrive;
   ctre::phoenix::motorcontrol::can::WPI_TalonFX m_motorTurn;
+  ctre::phoenix::sensors::WPI_CANCoder m_encoderTurn;
 
   hardwareSettings m_settings;
 };
