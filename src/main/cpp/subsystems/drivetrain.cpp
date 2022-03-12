@@ -1,5 +1,7 @@
 #include "subsystems/drivetrain.h"
 
+#include <frc/smartdashboard/SmartDashboard.h>
+
 drivetrain::drivetrain() {
     m_navX.ZeroYaw();
 }
@@ -18,9 +20,9 @@ void drivetrain::SwerveDrive(units::meters_per_second_t xSpeed,
     auto [frontRight, rearRight, frontLeft, rearLeft] = moduleStates;
 
     m_frontRight.SetDesiredState(frontRight);
-    m_rearRight.SetDesiredState(rearRight);
-    m_frontLeft.SetDesiredState(frontLeft);
-    m_rearLeft.SetDesiredState(rearLeft);
+    //m_rearRight.SetDesiredState(rearRight);
+    //m_frontLeft.SetDesiredState(frontLeft);
+    //m_rearLeft.SetDesiredState(rearLeft);
 }
 
 void drivetrain::UpdateOdometry() {
@@ -29,6 +31,9 @@ void drivetrain::UpdateOdometry() {
                       m_rearLeft.GetState());
 }
 
-void drivetrain::Periodic() {}
+void drivetrain::Periodic() {
+    UpdateOdometry();
+    frc::SmartDashboard::PutNumber("TEST Module Angle", 0.6); //test output.
+}
 
 void drivetrain::SimulationPeriodic() {}
