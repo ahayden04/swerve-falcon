@@ -1,4 +1,5 @@
 #include "swerveModule.h"
+#include <frc/smartdashboard/SmartDashboard.h>
 #include <iostream>
 
 swerveModule::swerveModule(const int module[])
@@ -22,11 +23,12 @@ void swerveModule::ConfigModule(const ConfigType& type) {
             break;
         case ConfigType::motorTurn :
             m_motorTurn.ConfigFactoryDefault();
+            m_motorTurn.ConfigAllSettings(m_settings.motorTurn);
             m_motorTurn.ConfigRemoteFeedbackFilter(m_encoderTurn.GetDeviceNumber(),
                                                    ctre::phoenix::motorcontrol::
-                                                   RemoteSensorSource::RemoteSensorSource_CANCoder, 0, 0);
-            m_motorTurn.ConfigAllSettings(m_settings.motorTurn);
+                                                   RemoteSensorSource::RemoteSensorSource_CANCoder, 0, 50);
             m_motorTurn.SetInverted(ctre::phoenix::motorcontrol::TalonFXInvertType::CounterClockwise);
+            m_motorTurn.SelectProfileSlot(0, 0);
             break;
         case ConfigType::encoderTurn :
             m_encoderTurn.ConfigFactoryDefault();
@@ -48,6 +50,9 @@ frc::SwerveModuleState swerveModule::GetState() {
 void swerveModule::SetDesiredState(const frc::SwerveModuleState& referenceState) {
     const auto state = frc::SwerveModuleState::Optimize(
         referenceState,units::degree_t(m_encoderTurn.GetAbsolutePosition()));
+        //See if this return the position in +-Cancoder units counting forever, as opposed to absolulte -180 to +180 deg.
+        std::cout << m_motorTurn.GetSelectedSensorPosition(0) << "\n";
+        std::cout << m_encoderTurn.GetAbsolutePosition() << "\n";
 
         const auto targetWheelSpeed{state.speed};
         const auto targetAngle{state.angle.Degrees().value()};
@@ -55,13 +60,13 @@ void swerveModule::SetDesiredState(const frc::SwerveModuleState& referenceState)
         units::native_units_per_decisecond_t targetMotorSpeed{
             (targetWheelSpeed * drivetrainConstants::calculations::kFinalDriveRatio)
             / drivetrainConstants::calculations::kWheelCircumference};
-        m_motorDrive.Set(ctre::phoenix::motorcontrol::ControlMode::Velocity, targetMotorSpeed.value());
-        std::cout << targetMotorSpeed.value() << "-SPEED\n";
+        //m_motorDrive.Set(ctre::phoenix::motorcontrol::ControlMode::Velocity, targetMotorSpeed.value());
+        //std::cout << targetMotorSpeed.value() << "-target_SPEED\n";
 
         //This doesn't work for some reason. I suspect .value() doesn't produce a double by default.
         //m_motorTurn.Set(ctre::phoenix::motorcontrol::ControlMode::MotionMagic, state.angle.Degrees().value());
         
         //This right here produces output.
-        m_motorTurn.Set((ctre::phoenix::motorcontrol::ControlMode::MotionMagic, targetAngle));
-        std::cout << targetAngle << "-target_Deg\n";
+        //m_motorTurn.Set((ctre::phoenix::motorcontrol::TalonFXControlMode::MotionMagic, (targetAngle/(360/4096))));
+        //std::cout << targetAngle << "-target_Deg\n";
 }
