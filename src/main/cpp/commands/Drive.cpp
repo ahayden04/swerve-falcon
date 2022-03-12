@@ -1,5 +1,7 @@
 #include "commands/Drive.h"
 
+#include <frc/MathUtil.h>
+
 Drive::Drive(drivetrain* drivetrain,
              std::function<double()> xSpeed,
              std::function<double()> ySpeed,
@@ -15,9 +17,9 @@ Drive::Drive(drivetrain* drivetrain,
 void Drive::Initialize() { printf("Drive initialized.\n"); }
 
 void Drive::Execute() {
-  m_drivetrain->SwerveDrive(-m_ySpeed()*drivetrainConstants::calculations::kChassisMaxSpeed,
-                            -m_xSpeed()*drivetrainConstants::calculations::kChassisMaxSpeed,
-                            -m_zRotation()*drivetrainConstants::calculations::kModuleMaxAngularVelocity, true);
+  m_drivetrain->SwerveDrive(-frc::ApplyDeadband(m_ySpeed(), 0.05)*drivetrainConstants::calculations::kChassisMaxSpeed,
+                            -frc::ApplyDeadband(m_xSpeed(), 0.05)*drivetrainConstants::calculations::kChassisMaxSpeed,
+                            -frc::ApplyDeadband(m_zRotation(), 0.20)*drivetrainConstants::calculations::kModuleMaxAngularVelocity, false);
 }
 
 void Drive::End(bool interrupted) { printf("**Drive has been interrupted!**\n"); }
