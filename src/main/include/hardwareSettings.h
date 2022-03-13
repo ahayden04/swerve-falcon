@@ -55,8 +55,8 @@ class hardwareSettings {
         motorTurn.primaryPID.selectedFeedbackSensor = ctre::phoenix::motorcontrol::FeedbackDevice::RemoteSensor0;
         motorTurn.primaryPID.selectedFeedbackCoefficient = 1.0;
         motorTurn.closedloopRamp = 1.0;
-        motorTurn.peakOutputForward = 1.0F;
-        motorTurn.peakOutputReverse = -1.0F;
+        motorTurn.peakOutputForward = 0.1F;
+        motorTurn.peakOutputReverse = -0.1F;
         motorTurn.nominalOutputForward = 0.0F;
         motorTurn.nominalOutputReverse = -0.0F;
         motorTurn.neutralDeadband = 0.001;
