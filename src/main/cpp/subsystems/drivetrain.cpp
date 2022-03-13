@@ -32,7 +32,7 @@ void drivetrain::UpdateOdometry() {
 }
 
 void drivetrain::Periodic() {
-    UpdateOdometry();
+    //UpdateOdometry();
     frc::SmartDashboard::PutNumber("TEST Module Angle", 0.6); //test output.
 }
 
