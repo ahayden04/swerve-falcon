@@ -73,21 +73,24 @@ void swerveModule::SetDesiredState(const frc::SwerveModuleState& referenceState)
 frc::SwerveModuleState swerveModule::CustomOptimize(const frc::SwerveModuleState& desiredState,
                                                     const frc::Rotation2d& currentAngle) {
     auto absAngle{units::math::fmod(currentAngle.Degrees(), 360_deg)};
-    if (absAngle < 0_deg) {absAngle = absAngle + 360_deg;}
-    auto difference = desiredState.angle.Degrees() - absAngle;
+    auto optAngle = desiredState.angle;
+    auto optSpeed = desiredState.speed;
 
+    if (absAngle < 0_deg) {absAngle = absAngle + 360_deg;}
+    if (units::math::abs(absAngle) > 270_deg) {
+        optAngle = desiredState.angle.Degrees() + 360_deg;
+    }
+    auto difference = optAngle.Degrees() - absAngle;
+    //std::cout << difference.value() << "-FIRSTdifference\n";
     if (units::math::abs(difference) > 90_deg) {
-        auto adjSpeed = -desiredState.speed;
+        optSpeed = -desiredState.speed;
         if (difference > 0_deg) {
             difference = difference - 180_deg;
         } else {
             difference = difference + 180_deg;
         }
-
-        auto adjAngle = currentAngle.Degrees() + difference;
-        return {adjSpeed, adjAngle};
-    } else {
-        auto adjAngle = currentAngle.Degrees() + difference;
-        return {desiredState.speed, adjAngle};
     }
+    optAngle = currentAngle.Degrees() + difference;
+    //std::cout << difference.value() << "-difference?\n";
+    return {optSpeed, optAngle};
 }
