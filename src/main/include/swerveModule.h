@@ -22,6 +22,8 @@ class swerveModule {
 
   void SetDesiredState(const frc::SwerveModuleState& state);
 
+  frc::SwerveModuleState CustomOptimize(const frc::SwerveModuleState& desiredState, const frc::Rotation2d& currentAngle);
+
  private:
   ctre::phoenix::motorcontrol::can::WPI_TalonFX m_motorDrive;
   ctre::phoenix::motorcontrol::can::WPI_TalonFX m_motorTurn;

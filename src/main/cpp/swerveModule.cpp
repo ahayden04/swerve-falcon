@@ -48,11 +48,10 @@ frc::SwerveModuleState swerveModule::GetState() {
 }
 
 void swerveModule::SetDesiredState(const frc::SwerveModuleState& referenceState) {
-    const auto state = frc::SwerveModuleState::Optimize(
-        referenceState,units::degree_t(m_encoderTurn.GetAbsolutePosition()));
-        //See if this return the position in +-Cancoder units counting forever, as opposed to absolulte -180 to +180 deg.
-        std::cout << m_motorTurn.GetSelectedSensorPosition(0) << "\n";
-        std::cout << m_encoderTurn.GetAbsolutePosition() << "\n";
+    const auto state = CustomOptimize(
+        referenceState,units::degree_t(m_encoderTurn.GetPosition()));
+        //This returns the position in +-Cancoder units counting forever, as opposed to absolulte -180 to +180 deg.
+        std::cout << m_encoderTurn.GetPosition() << "-GetPosition() | ";
 
         const auto targetWheelSpeed{state.speed};
         const auto targetAngle{state.angle.Degrees().value()};
@@ -68,5 +67,27 @@ void swerveModule::SetDesiredState(const frc::SwerveModuleState& referenceState)
         
         //This right here produces output.
         //m_motorTurn.Set((ctre::phoenix::motorcontrol::TalonFXControlMode::MotionMagic, (targetAngle/(360/4096))));
-        //std::cout << targetAngle << "-target_Deg\n";
+        std::cout << targetAngle << "-target_Deg\n";
+}
+
+frc::SwerveModuleState swerveModule::CustomOptimize(const frc::SwerveModuleState& desiredState,
+                                                    const frc::Rotation2d& currentAngle) {
+    auto absAngle{units::math::fmod(currentAngle.Degrees(), 360_deg)};
+    if (absAngle < 0_deg) {absAngle = absAngle + 360_deg;}
+    auto difference = desiredState.angle.Degrees() - absAngle;
+
+    if (units::math::abs(difference) > 90_deg) {
+        auto adjSpeed = -desiredState.speed;
+        if (difference > 0_deg) {
+            difference = difference - 180_deg;
+        } else {
+            difference = difference + 180_deg;
+        }
+
+        auto adjAngle = currentAngle.Degrees() + difference;
+        return {adjSpeed, adjAngle};
+    } else {
+        auto adjAngle = currentAngle.Degrees() + difference;
+        return {desiredState.speed, adjAngle};
+    }
 }
