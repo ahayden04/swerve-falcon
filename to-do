@@ -1,20 +1,17 @@
 General coding:
 - Create swerveModule SDS-wheel travel, so that I can convert rotations to inches.
 - Use odometry object.
-- check order of events in switch statement.
 - Double-check CANCoder settings.
 - Finish TalonFX Drive settings.
 - Finish TalonFX Turn settings.
-- Add more unit types?
-- Should there be a difference between kChassisMaxSpeed and kModuleMaxSpeed?
+- Add more unit types.
+- There is a difference between kChassisMaxSpeed and kModuleMaxSpeed.
 - Double check inversion with controller.
 - Add code to zero CANcoder.
-- Something is wrong with the way I am passing the turn information. (99% sure)
-- Current limits?
-- Add LiveWindow Groupings?
+- Current limits.
+- Add LiveWindow Groupings.
 - GUI Button to reset gyro.
 - GUI Button to reset module encoders.
-- Add deadbands.
 
 Administrative:
 - Put SwerveModule code in its own folder.
@@ -31,7 +28,6 @@ Administrative:
 - "ask about these".
 
 With physical robot:
-- Check if CANCoder needs to be inverted.
 - Tune PID for Drive.
 - Tune PID for Turn.
 - Get final module locations.
