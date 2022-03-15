@@ -50,24 +50,26 @@ frc::SwerveModuleState swerveModule::GetState() {
 void swerveModule::SetDesiredState(const frc::SwerveModuleState& referenceState) {
     const auto state = CustomOptimize(
         referenceState,units::degree_t(m_encoderTurn.GetPosition()));
-        //This returns the position in +-Cancoder units counting forever, as opposed to absolulte -180 to +180 deg.
-        std::cout << m_encoderTurn.GetPosition() << "-GetPosition() | ";
+    //This returns the position in +-Cancoder units counting forever, as opposed to absolulte -180 to +180 deg.
+    std::cout << m_encoderTurn.GetPosition() << "-GetPosition() | ";
 
-        const auto targetWheelSpeed{state.speed};
-        const auto targetAngle{state.angle.Degrees().value()};
-
-        units::native_units_per_decisecond_t targetMotorSpeed{
-            (targetWheelSpeed * drivetrainConstants::calculations::kFinalDriveRatio)
-            / drivetrainConstants::calculations::kWheelCircumference};
-        //m_motorDrive.Set(ctre::phoenix::motorcontrol::ControlMode::Velocity, targetMotorSpeed.value());
-        //std::cout << targetMotorSpeed.value() << "-target_SPEED\n";
-
-        //This doesn't work for some reason. I suspect .value() doesn't produce a double by default.
-        //m_motorTurn.Set(ctre::phoenix::motorcontrol::ControlMode::MotionMagic, state.angle.Degrees().value());
+    const auto targetWheelSpeed{state.speed};
+    const auto targetAngle{(state.angle.Degrees().value())};
+    const double turnOutput = targetAngle * (4096/360);
         
-        //This right here produces output.
-        //m_motorTurn.Set((ctre::phoenix::motorcontrol::TalonFXControlMode::MotionMagic, (targetAngle/(360/4096))));
-        std::cout << targetAngle << "-target_Deg\n";
+
+    units::native_units_per_decisecond_t targetMotorSpeed{
+        (targetWheelSpeed * drivetrainConstants::calculations::kFinalDriveRatio)
+        / drivetrainConstants::calculations::kWheelCircumference};
+    //m_motorDrive.Set(ctre::phoenix::motorcontrol::ControlMode::Velocity, targetMotorSpeed.value());
+    //std::cout << targetMotorSpeed.value() << "-target_SPEED\n";
+
+    //This doesn't work for some reason. I suspect .value() doesn't produce a double by default.
+    //m_motorTurn.Set(ctre::phoenix::motorcontrol::ControlMode::MotionMagic, state.angle.Degrees().value());
+        
+    //This right here produces output.
+    m_motorTurn.Set(ctre::phoenix::motorcontrol::TalonFXControlMode::Position, turnOutput);
+    std::cout << targetAngle << "-target_Deg | " << turnOutput << "u\n";
 }
 
 frc::SwerveModuleState swerveModule::CustomOptimize(const frc::SwerveModuleState& desiredState,
@@ -81,7 +83,7 @@ frc::SwerveModuleState swerveModule::CustomOptimize(const frc::SwerveModuleState
         optAngle = desiredState.angle.Degrees() + 360_deg;
     }
     auto difference = optAngle.Degrees() - absAngle;
-    //std::cout << difference.value() << "-FIRSTdifference\n";
+
     if (units::math::abs(difference) > 90_deg) {
         optSpeed = -desiredState.speed;
         if (difference > 0_deg) {
@@ -91,6 +93,5 @@ frc::SwerveModuleState swerveModule::CustomOptimize(const frc::SwerveModuleState
         }
     }
     optAngle = currentAngle.Degrees() + difference;
-    //std::cout << difference.value() << "-difference?\n";
     return {optSpeed, optAngle};
 }
