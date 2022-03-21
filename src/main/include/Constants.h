@@ -36,19 +36,30 @@ namespace drivetrainConstants {
     constexpr int kEncoderTurnFrontLeftID = 10;
     constexpr int kEncoderTurnRearLeftID = 11;
 
+    namespace offsets {
+        constexpr double kFrontRight{54.844};
+        constexpr double kRearRight{-154.951};
+        constexpr double kFrontLeft{-139.922};
+        constexpr double kRearLeft{103.008};
+    }
+
     namespace swerveModules {
-        constexpr int kModuleFrontRight[3]{kMotorDriveFrontRightID,
+        constexpr double kModuleFrontRight[4]{kMotorDriveFrontRightID,
                                                    kMotorTurnFrontRightID,
-                                                   kEncoderTurnFrontRightID};
-        constexpr int kModuleRearRight[3]{kMotorDriveRearRightID,
+                                                   kEncoderTurnFrontRightID,
+                                                   offsets::kFrontRight};
+        constexpr double kModuleRearRight[4]{kMotorDriveRearRightID,
                                                   kMotorTurnRearRightID,
-                                                  kEncoderTurnRearRightID};
-        constexpr int kModuleFrontLeft[3]{kMotorDriveFrontLeftID,
+                                                  kEncoderTurnRearRightID,
+                                                  offsets::kRearRight};
+        constexpr double kModuleFrontLeft[4]{kMotorDriveFrontLeftID,
                                                   kMotorTurnFrontLeftID,
-                                                  kEncoderTurnFrontLeftID};
-        constexpr int kModuleRearLeft[3]{kMotorDriveRearLeftID,
+                                                  kEncoderTurnFrontLeftID,
+                                                  offsets::kFrontLeft};
+        constexpr double kModuleRearLeft[4]{kMotorDriveRearLeftID,
                                                  kMotorTurnRearLeftID,
-                                                 kEncoderTurnRearLeftID};
+                                                 kEncoderTurnRearLeftID,
+                                                 offsets::kRearLeft};
     }
 
     namespace calculations {

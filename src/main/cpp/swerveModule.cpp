@@ -1,9 +1,11 @@
 #include "swerveModule.h"
 #include <frc/smartdashboard/SmartDashboard.h>
+#include <frc/MathUtil.h>
 #include <iostream>
 
-swerveModule::swerveModule(const int module[])
-    : m_motorDrive(module[0]), m_motorTurn(module[1]), m_encoderTurn(module[2]) {
+swerveModule::swerveModule(const double module[])
+    : m_motorDrive(module[0]), m_motorTurn(module[1]),
+      m_encoderTurn(module[2]), m_encoderOffset(module[3]) {
     std::cout << "\nFor module #" << module[0] << ":\n";
     std::cout << m_motorDrive.GetDeviceID() << " - drive Falcon ID.\n";
     std::cout << m_motorTurn.GetDeviceID() << " - turn Falcon ID.\n";
@@ -33,6 +35,7 @@ void swerveModule::ConfigModule(const ConfigType& type) {
         case ConfigType::encoderTurn :
             m_encoderTurn.ConfigFactoryDefault();
             m_encoderTurn.ConfigAllSettings(m_settings.encoderTurn);
+            m_encoderTurn.ConfigMagnetOffset(m_encoderOffset);
             break;
         default :
             throw std::invalid_argument("Invalid swerveModule ConfigType");
@@ -44,7 +47,7 @@ frc::SwerveModuleState swerveModule::GetState() {
     units::meters_per_second_t wheelSpeed{
         (motorSpeed * drivetrainConstants::calculations::kWheelCircumference)
         / drivetrainConstants::calculations::kFinalDriveRatio};
-    return {wheelSpeed,frc::Rotation2d(units::degree_t(m_encoderTurn.GetAbsolutePosition()))};
+    return {wheelSpeed,frc::Rotation2d(frc::AngleModulus(units::degree_t(m_encoderTurn.GetPosition())))};
 }
 
 void swerveModule::SetDesiredState(const frc::SwerveModuleState& referenceState) {
