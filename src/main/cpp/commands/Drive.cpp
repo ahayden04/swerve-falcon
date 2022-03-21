@@ -19,7 +19,7 @@ void Drive::Initialize() { printf("Drive initialized.\n"); }
 void Drive::Execute() {
   m_drivetrain->SwerveDrive(-frc::ApplyDeadband(m_ySpeed(), 0.05)*drivetrainConstants::calculations::kChassisMaxSpeed,
                             -frc::ApplyDeadband(m_xSpeed(), 0.05)*drivetrainConstants::calculations::kChassisMaxSpeed,
-                            -frc::ApplyDeadband(m_zRotation(), 0.20)*drivetrainConstants::calculations::kModuleMaxAngularVelocity, false);
+                            -frc::ApplyDeadband(m_zRotation(), 0.20)*drivetrainConstants::calculations::kModuleMaxAngularVelocity, true);
 }
 
 void Drive::End(bool interrupted) { printf("**Drive has been interrupted!**\n"); }
