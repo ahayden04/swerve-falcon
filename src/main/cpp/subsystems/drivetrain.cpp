@@ -20,9 +20,9 @@ void drivetrain::SwerveDrive(units::meters_per_second_t xSpeed,
     auto [frontRight, rearRight, frontLeft, rearLeft] = moduleStates;
 
     m_frontRight.SetDesiredState(frontRight);
-    //m_rearRight.SetDesiredState(rearRight);
-    //m_frontLeft.SetDesiredState(frontLeft);
-    //m_rearLeft.SetDesiredState(rearLeft);
+    m_rearRight.SetDesiredState(rearRight);
+    m_frontLeft.SetDesiredState(frontLeft);
+    m_rearLeft.SetDesiredState(rearLeft);
 }
 
 void drivetrain::UpdateOdometry() {
