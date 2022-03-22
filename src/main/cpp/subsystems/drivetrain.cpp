@@ -32,8 +32,13 @@ void drivetrain::UpdateOdometry() {
 }
 
 void drivetrain::Periodic() {
-    //UpdateOdometry();
-    frc::SmartDashboard::PutNumber("TEST Module Angle", 0.6); //test output.
+    UpdateOdometry();
+
+    // Test posting angle to Dashboard.
+    frc::SmartDashboard::PutNumber("Front Right Angle", m_frontRight.DashboardInfo(swerveModule::DataType::kCurrentAngle));
+    frc::SmartDashboard::PutNumber("Rear Right Angle", m_rearRight.DashboardInfo(swerveModule::DataType::kCurrentAngle));
+    frc::SmartDashboard::PutNumber("Front Left Angle", m_frontLeft.DashboardInfo(swerveModule::DataType::kCurrentAngle));
+    frc::SmartDashboard::PutNumber("Rear Left Angle", m_rearLeft.DashboardInfo(swerveModule::DataType::kCurrentAngle));
 }
 
 void drivetrain::SimulationPeriodic() {}

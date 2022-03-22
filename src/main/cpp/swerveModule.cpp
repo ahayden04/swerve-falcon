@@ -54,7 +54,6 @@ void swerveModule::SetDesiredState(const frc::SwerveModuleState& referenceState)
     const auto state = CustomOptimize(
         referenceState,units::degree_t(m_encoderTurn.GetPosition()));
     //This returns the position in +-Cancoder units counting forever, as opposed to absolulte -180 to +180 deg.
-    std::cout << m_encoderTurn.GetPosition() << "-GetPosition() | ";
 
     const auto targetWheelSpeed{state.speed};
     const auto targetAngle{(state.angle.Degrees().value())};
@@ -97,4 +96,19 @@ frc::SwerveModuleState swerveModule::CustomOptimize(const frc::SwerveModuleState
     }
     optAngle = currentAngle.Degrees() + difference;
     return {optSpeed, optAngle};
+}
+
+double swerveModule::DashboardInfo(const DataType& type) {
+    switch(type) {
+        case DataType::kCurrentAngle :
+            return {units::degree_t(frc::AngleModulus(units::degree_t(m_encoderTurn.GetPosition()))).value()};
+        /*case DataType::kCurrentVelocity :
+            units::native_units_per_decisecond_t motorSpeed{m_motorDrive.GetSelectedSensorVelocity(0)};
+            units::meters_per_second_t wheelSpeed{
+                (motorSpeed * drivetrainConstants::calculations::kWheelCircumference)
+                / drivetrainConstants::calculations::kFinalDriveRatio};
+            return {wheelSpeed.value()};*/
+        default :
+            throw std::invalid_argument("Invalid DashboardInfo DataType");
+    }
 }
