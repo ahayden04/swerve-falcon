@@ -57,7 +57,7 @@ void swerveModule::SetDesiredState(const frc::SwerveModuleState& referenceState)
 
     const auto targetWheelSpeed{state.speed};
     const auto targetAngle{(state.angle.Degrees().value())};
-    const double turnOutput = targetAngle * (4096/360);
+    const double turnOutput = targetAngle * (4096.0/360.0);
         
 
     units::native_units_per_decisecond_t targetMotorSpeed{
