@@ -3,6 +3,8 @@
 #include <frc2/command/CommandBase.h>
 #include <frc2/command/CommandHelper.h>
 
+#include <frc/filter/SlewRateLimiter.h>
+
 #include "subsystems/drivetrain.h"
 
 /**
@@ -37,4 +39,8 @@ class Drive
   std::function<double()> m_xSpeed{0};
   std::function<double()> m_ySpeed{0};
   std::function<double()> m_zRotation{0};
+
+  frc::SlewRateLimiter<units::scalar> m_xSpeedLimiter{3 / 1_s};
+  frc::SlewRateLimiter<units::scalar> m_ySpeedLimiter{3 / 1_s};
+  frc::SlewRateLimiter<units::scalar> m_zRotationLimiter{3 / 1_s};
 };
