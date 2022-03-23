@@ -56,9 +56,8 @@ void swerveModule::SetDesiredState(const frc::SwerveModuleState& referenceState)
     //This returns the position in +-Cancoder units counting forever, as opposed to absolulte -180 to +180 deg.
 
     const auto targetWheelSpeed{state.speed};
-    const auto targetAngle{(state.angle.Degrees().value())};
-    const double turnOutput = targetAngle * (4096.0/360.0);
-        
+    m_targetAngle = state.angle.Degrees().value();
+    const double turnOutput = m_targetAngle * (4096.0/360.0);
 
     units::native_units_per_decisecond_t targetMotorSpeed{
         (targetWheelSpeed * drivetrainConstants::calculations::kFinalDriveRatio)
@@ -71,20 +70,23 @@ void swerveModule::SetDesiredState(const frc::SwerveModuleState& referenceState)
         
     //This right here produces output.
     m_motorTurn.Set(ctre::phoenix::motorcontrol::TalonFXControlMode::Position, turnOutput);
-    std::cout << targetAngle << "-target_Deg | " << turnOutput << "u\n";
+    //std::cout << turnOutput << "u\n";
 }
 
 frc::SwerveModuleState swerveModule::CustomOptimize(const frc::SwerveModuleState& desiredState,
                                                     const frc::Rotation2d& currentAngle) {
-    auto absAngle{units::math::fmod(currentAngle.Degrees(), 360_deg)};
+    auto modulusAngle{frc::AngleModulus(currentAngle.Degrees())};
     auto optAngle = desiredState.angle;
     auto optSpeed = desiredState.speed;
+    
+    auto difference = optAngle.Degrees() - modulusAngle;
+    frc::SmartDashboard::PutNumber("Difference", difference.value());
 
-    if (absAngle < 0_deg) {absAngle = absAngle + 360_deg;}
-    if (units::math::abs(absAngle) > 270_deg) {
-        optAngle = desiredState.angle.Degrees() + 360_deg;
+    if (difference >= 270_deg) {
+        difference = difference - 360_deg;
+    } else if (difference <= -270_deg) {
+        difference = difference + 360_deg;
     }
-    auto difference = optAngle.Degrees() - absAngle;
 
     if (units::math::abs(difference) > 90_deg) {
         optSpeed = -desiredState.speed;
@@ -95,6 +97,8 @@ frc::SwerveModuleState swerveModule::CustomOptimize(const frc::SwerveModuleState
         }
     }
     optAngle = currentAngle.Degrees() + difference;
+
+    frc::SmartDashboard::PutNumber("Desired Angle", optAngle.Degrees().value());
     return {optSpeed, optAngle};
 }
 
@@ -108,6 +112,8 @@ double swerveModule::DashboardInfo(const DataType& type) {
                 (motorSpeed * drivetrainConstants::calculations::kWheelCircumference)
                 / drivetrainConstants::calculations::kFinalDriveRatio};
             return {wheelSpeed.value()};*/
+        case DataType::kTargetAngle :
+            return {m_targetAngle};
         default :
             throw std::invalid_argument("Invalid DashboardInfo DataType");
     }

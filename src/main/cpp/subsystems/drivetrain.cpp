@@ -17,6 +17,10 @@ void drivetrain::SwerveDrive(units::meters_per_second_t xSpeed,
     //ADD FINAL MAX SPEED, TEMP 0_mps
     m_kinematics.DesaturateWheelSpeeds(&moduleStates, drivetrainConstants::calculations::kModuleMaxSpeed);
 
+    frc::SmartDashboard::PutNumber("xSpeed", xSpeed.value());
+    frc::SmartDashboard::PutNumber("ySpeed", ySpeed.value());
+    frc::SmartDashboard::PutNumber("zRotation", zRot.value());
+    
     auto [frontRight, rearRight, frontLeft, rearLeft] = moduleStates;
 
     m_frontRight.SetDesiredState(frontRight);
@@ -39,6 +43,11 @@ void drivetrain::Periodic() {
     frc::SmartDashboard::PutNumber("Rear Right Angle", m_rearRight.DashboardInfo(swerveModule::DataType::kCurrentAngle));
     frc::SmartDashboard::PutNumber("Front Left Angle", m_frontLeft.DashboardInfo(swerveModule::DataType::kCurrentAngle));
     frc::SmartDashboard::PutNumber("Rear Left Angle", m_rearLeft.DashboardInfo(swerveModule::DataType::kCurrentAngle));
+
+    frc::SmartDashboard::PutNumber("Front Right TARGET", m_frontRight.DashboardInfo(swerveModule::DataType::kTargetAngle));
+    frc::SmartDashboard::PutNumber("Rear Right TARGET", m_rearRight.DashboardInfo(swerveModule::DataType::kTargetAngle));
+    frc::SmartDashboard::PutNumber("Front Left TARGET", m_frontLeft.DashboardInfo(swerveModule::DataType::kTargetAngle));
+    frc::SmartDashboard::PutNumber("Rear Left TARGET", m_rearLeft.DashboardInfo(swerveModule::DataType::kTargetAngle));
 }
 
 void drivetrain::SimulationPeriodic() {}

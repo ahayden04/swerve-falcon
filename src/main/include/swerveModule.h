@@ -24,7 +24,7 @@ class swerveModule {
 
   frc::SwerveModuleState CustomOptimize(const frc::SwerveModuleState& desiredState, const frc::Rotation2d& currentAngle);
 
-  enum class DataType {kCurrentAngle, kCurrentVelocity};
+  enum class DataType {kCurrentAngle, kCurrentVelocity, kTargetAngle};
   double DashboardInfo(const DataType& type);
 
  private:
@@ -32,6 +32,7 @@ class swerveModule {
   ctre::phoenix::motorcontrol::can::WPI_TalonFX m_motorTurn;
   ctre::phoenix::sensors::WPI_CANCoder m_encoderTurn;
   const double m_encoderOffset;
+  double m_targetAngle;
 
   hardwareSettings m_settings;
 };
