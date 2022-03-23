@@ -22,6 +22,7 @@ void swerveModule::ConfigModule(const ConfigType& type) {
             m_motorDrive.ConfigAllSettings(m_settings.motorDrive);
             //Bevel gear on left side.
             m_motorDrive.SetInverted(ctre::phoenix::motorcontrol::TalonFXInvertType::Clockwise);
+            m_motorDrive.SelectProfileSlot(0, 0);
             break;
         case ConfigType::motorTurn :
             m_motorTurn.ConfigFactoryDefault();
@@ -62,7 +63,8 @@ void swerveModule::SetDesiredState(const frc::SwerveModuleState& referenceState)
     units::native_units_per_decisecond_t targetMotorSpeed{
         (targetWheelSpeed * drivetrainConstants::calculations::kFinalDriveRatio)
         / drivetrainConstants::calculations::kWheelCircumference};
-    //m_motorDrive.Set(ctre::phoenix::motorcontrol::ControlMode::Velocity, targetMotorSpeed.value());
+    
+    m_motorDrive.Set(ctre::phoenix::motorcontrol::ControlMode::Velocity, targetMotorSpeed.value());
     //std::cout << targetMotorSpeed.value() << "-target_SPEED\n";
 
     //This doesn't work for some reason. I suspect .value() doesn't produce a double by default.

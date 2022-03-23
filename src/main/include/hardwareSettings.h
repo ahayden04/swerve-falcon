@@ -36,17 +36,17 @@ class hardwareSettings {
         motorDrive.slot0.kP = 0;
         motorDrive.slot0.kI = 0;
         motorDrive.slot0.kD = 0;
-        motorDrive.slot0.kF = 1;
-        motorDrive.slot0.integralZone = 900;
-        motorDrive.slot0.allowableClosedloopError = 217;
-        motorDrive.slot0.maxIntegralAccumulator = 254.000000;
+        motorDrive.slot0.kF =  (0.5*1023.0)/(22100.0*0.5);
+        //motorDrive.slot0.integralZone = 900;
+        motorDrive.slot0.allowableClosedloopError = 0;
+        //motorDrive.slot0.maxIntegralAccumulator = 254.000000;
         motorDrive.slot0.closedLoopPeakOutput = 1.0;
-        motorDrive.slot0.closedLoopPeriod = 33;
+        //motorDrive.slot0.closedLoopPeriod = 33;
         motorDrive.remoteSensorClosedLoopDisableNeutralOnLOS = false;
         ctre::phoenix::motorcontrol::SupplyCurrentLimitConfiguration supplyLimit(true, 23.1, 25, 1.4);
-        motorDrive.supplyCurrLimit = supplyLimit;
+        //motorDrive.supplyCurrLimit = supplyLimit;
         ctre::phoenix::motorcontrol::StatorCurrentLimitConfiguration statorLimit(true, 12.1, 87.4, 0.4);
-        motorDrive.statorCurrLimit = statorLimit;
+        //motorDrive.statorCurrLimit = statorLimit;
         motorDrive.motorCommutation = ctre::phoenix::motorcontrol::MotorCommutation::Trapezoidal;
         motorDrive.initializationStrategy = ctre::phoenix::sensors::SensorInitializationStrategy::BootToAbsolutePosition;
 
