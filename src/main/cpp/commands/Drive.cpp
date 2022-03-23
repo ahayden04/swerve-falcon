@@ -17,8 +17,8 @@ Drive::Drive(drivetrain* drivetrain,
 void Drive::Initialize() { printf("Drive initialized.\n"); }
 
 void Drive::Execute() {
-  m_drivetrain->SwerveDrive(-m_ySpeedLimiter.Calculate(frc::ApplyDeadband(m_ySpeed(), 0.05))*drivetrainConstants::calculations::kChassisMaxSpeed,
-                            -m_xSpeedLimiter.Calculate(frc::ApplyDeadband(m_xSpeed(), 0.05))*drivetrainConstants::calculations::kChassisMaxSpeed,
+  m_drivetrain->SwerveDrive(-m_ySpeedLimiter.Calculate(frc::ApplyDeadband(m_ySpeed(), 0.08))*drivetrainConstants::calculations::kChassisMaxSpeed,
+                            -m_xSpeedLimiter.Calculate(frc::ApplyDeadband(m_xSpeed(), 0.08))*drivetrainConstants::calculations::kChassisMaxSpeed,
                             -m_zRotationLimiter.Calculate(frc::ApplyDeadband(m_zRotation(), 0.20))*drivetrainConstants::calculations::kModuleMaxAngularVelocity, true);
 }
 
