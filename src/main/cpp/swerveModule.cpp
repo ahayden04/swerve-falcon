@@ -67,10 +67,6 @@ void swerveModule::SetDesiredState(const frc::SwerveModuleState& referenceState)
     m_motorDrive.Set(ctre::phoenix::motorcontrol::ControlMode::Velocity, targetMotorSpeed.value());
     //std::cout << targetMotorSpeed.value() << "-target_SPEED\n";
 
-    //This doesn't work for some reason. I suspect .value() doesn't produce a double by default.
-    //m_motorTurn.Set(ctre::phoenix::motorcontrol::ControlMode::MotionMagic, state.angle.Degrees().value());
-        
-    //This right here produces output.
     m_motorTurn.Set(ctre::phoenix::motorcontrol::TalonFXControlMode::Position, turnOutput);
     //std::cout << turnOutput << "u\n";
 }

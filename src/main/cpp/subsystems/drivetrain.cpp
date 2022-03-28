@@ -14,7 +14,6 @@ void drivetrain::SwerveDrive(units::meters_per_second_t xSpeed,
         fieldRelative ? frc::ChassisSpeeds::FromFieldRelativeSpeeds(
                             xSpeed, ySpeed, zRot, m_navX.GetRotation2d())
                       : frc::ChassisSpeeds{xSpeed, ySpeed, zRot});
-    //ADD FINAL MAX SPEED, TEMP 0_mps
     m_kinematics.DesaturateWheelSpeeds(&moduleStates, drivetrainConstants::calculations::kModuleMaxSpeed);
 
     frc::SmartDashboard::PutNumber("xSpeed", xSpeed.value());

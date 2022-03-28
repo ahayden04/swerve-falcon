@@ -9,9 +9,6 @@ class hardwareSettings {
      ctre::phoenix::motorcontrol::can::TalonFXConfiguration motorTurn;
 
 	hardwareSettings() {
-		/*Construct all of the configurations with needed values.
-		 *FX still have arbitrary values to demonstrate the feature
-         */
 
         //CanCoder
         encoderTurn.velocityMeasurementPeriod = ctre::phoenix::sensors::SensorVelocityMeasPeriod::Period_100Ms;
@@ -27,8 +24,8 @@ class hardwareSettings {
         motorDrive.primaryPID.selectedFeedbackSensor = ctre::phoenix::motorcontrol::FeedbackDevice::IntegratedSensor;
         motorDrive.primaryPID.selectedFeedbackCoefficient = 1.0;
         motorDrive.closedloopRamp = 1.705000;
-        motorDrive.peakOutputForward = 1.0F;
-        motorDrive.peakOutputReverse = -1.0F;
+        motorDrive.peakOutputForward = 0.20F;
+        motorDrive.peakOutputReverse = -0.20F;
         motorDrive.nominalOutputForward = 0.0;
         motorDrive.nominalOutputReverse = -0.0;
         motorDrive.neutralDeadband = 0.001;
@@ -54,8 +51,8 @@ class hardwareSettings {
         motorTurn.primaryPID.selectedFeedbackSensor = ctre::phoenix::motorcontrol::FeedbackDevice::RemoteSensor0;
         motorTurn.primaryPID.selectedFeedbackCoefficient = 1.0;
         motorTurn.closedloopRamp = 1.0;
-        motorTurn.peakOutputForward = 0.15F;
-        motorTurn.peakOutputReverse = -0.15F;
+        motorTurn.peakOutputForward = 0.20F; //0.15
+        motorTurn.peakOutputReverse = -0.20F; //0.15
         motorTurn.nominalOutputForward = 0.018F;
         motorTurn.nominalOutputReverse = -0.018F;
         motorTurn.neutralDeadband = 0.001;

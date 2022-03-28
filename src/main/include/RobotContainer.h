@@ -4,9 +4,9 @@
 
 #pragma once
 
-#include <frc2/command/Command.h> //ask about these.
+#include <frc2/command/Command.h>
 
-#include "Constants.h" //ask about these.
+#include "Constants.h"
 
 #include "commands/Auto.h"
 #include "commands/Drive.h"
