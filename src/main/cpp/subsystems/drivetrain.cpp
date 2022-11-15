@@ -38,6 +38,7 @@ void drivetrain::Periodic() {
     UpdateOdometry();
 
     // Test posting angle to Dashboard.
+    //frc::SmartDashboard::PutNumber("new data", 0.087890625*remainder(m_frontLeft.GetSelectedSensorPosition(), 4096));
     frc::SmartDashboard::PutNumber("Front Right Angle", m_frontRight.DashboardInfo(swerveModule::DataType::kCurrentAngle));
     frc::SmartDashboard::PutNumber("Rear Right Angle", m_rearRight.DashboardInfo(swerveModule::DataType::kCurrentAngle));
     frc::SmartDashboard::PutNumber("Front Left Angle", m_frontLeft.DashboardInfo(swerveModule::DataType::kCurrentAngle));

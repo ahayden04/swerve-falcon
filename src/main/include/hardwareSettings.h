@@ -11,10 +11,13 @@ class hardwareSettings {
 	hardwareSettings() {
 
         //CanCoder
+        motorTurn.velocityMeasurementPeriod = ctre::phoenix::sensors::SensorVelocityMeasPeriod::Period_100Ms;
         encoderTurn.velocityMeasurementPeriod = ctre::phoenix::sensors::SensorVelocityMeasPeriod::Period_100Ms;
         //encoderTurn.velocityMeasurementWindow = 64;
+        motorTurn.absoluteSensorRange = ctre::phoenix::sensors::AbsoluteSensorRange::Signed_PlusMinus180;
         encoderTurn.absoluteSensorRange = ctre::phoenix::sensors::AbsoluteSensorRange::Signed_PlusMinus180;
         encoderTurn.sensorDirection = false;
+        //motorTurn.initializationStrategy = ctre::phoenix::sensors::SensorInitializationStrategy::BootToAbsolutePosition;
         encoderTurn.initializationStrategy = ctre::phoenix::sensors::SensorInitializationStrategy::BootToAbsolutePosition;
         encoderTurn.sensorCoefficient = 360.0 / 4096.0;
         encoderTurn.unitString = std::string("deg");
