@@ -4,6 +4,8 @@
 #include <iostream>
 #include <cmath>
 
+using ControlMode = ctre::phoenix::motorcontrol::ControlMode;
+
 
 swerveModule::swerveModule(const double module[])
     : m_motorDrive(module[0]), m_motorTurn(module[1]),
